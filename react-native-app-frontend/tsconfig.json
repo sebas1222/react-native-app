@@ -1,6 +1,21 @@
 {
-  "extends": "expo/tsconfig.base",
+  "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@atoms/*": ["src/components/atoms/*"],
+      "@molecules/*": ["src/components/molecules/*"],
+      "@organisms/*": ["src/components/organisms/*"],
+      "@templates/*": ["src/components/templates/*"],
+      "@screens/*": ["src/components/screens/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@navigations/*": ["src/navigations/*"],
+      "@yupSchemas/*": ["src/yupSchemas/*"],
+      "*": ["src/*"],
+      "tests": ["tests/*"],
+      "@components/": ["src/components/*"]
+    }
   }
 }
