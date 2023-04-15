@@ -19,9 +19,7 @@ const initialValuesRegisterForm: RegisterFormTypes = {
 const RegisterTemplate = () => {
   const navigation = useNavigation<RootStackParamList>();
 
-  const handleSubmit = (values: RegisterFormTypes) => {
-    console.log(values);
-  };
+  const handleSubmit = (values: RegisterFormTypes) => {};
   return (
     <ScrollView>
       <View

@@ -6,18 +6,19 @@ import Home from "@screens/Home";
 import RCCustomTab from "@atoms/RCCustomTab";
 import Recipes from "@screens/Recipes";
 import Search from "@screens/Search";
-import { Text, View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 export default function BottomTabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
         tabBarStyle: { alignItems: "center" },
       }}
       initialRouteName={routes.homeRoutes.homeTab.init}
     >
+      {/* <Tab.Screen name={routes.homeRoutes.homeTab.label} component={Home} />
+      <Tab.Screen name={routes.homeRoutes.recipes.label} component={Recipes} /> */}
+
       <Tab.Screen
         name={routes.homeRoutes.homeTab.label}
         component={Home}

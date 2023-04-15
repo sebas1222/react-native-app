@@ -2,7 +2,7 @@ import LoginTemplate from "@templates/LoginTemplate";
 import React from "react";
 
 const Login = () => {
-  return <LoginTemplate />;
+  return <LoginTemplate></LoginTemplate>;
 };
 
 export default Login;

@@ -36,4 +36,4 @@ const RCCustomTabStyles = StyleSheet.create({
   },
 });
 
-export default RCCustomTab;
+export default React.memo(RCCustomTab);

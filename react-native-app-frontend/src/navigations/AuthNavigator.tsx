@@ -15,7 +15,6 @@ const AuthNavigator = () => {
       screenOptions={{
         headerTintColor: "white",
         headerTitleAlign: "center",
-
         headerStyle: {
           backgroundColor: mainColors.quartery,
         },
@@ -33,8 +32,8 @@ const AuthNavigator = () => {
         component={Register}
       />
       <Stack.Screen
+        options={{ headerShown: false }}
         name={routes.authRoutes.home.init}
-        options={{ headerTitle: "" }}
         component={BottomTabNavigator}
       />
     </Stack.Navigator>
