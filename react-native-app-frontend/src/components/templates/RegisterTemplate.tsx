@@ -2,12 +2,15 @@ import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Formik } from "formik";
 import { useNavigation } from "@react-navigation/native";
-import { RegisterFormTypes, RootStackParamList } from "@interfaces/index";
-import { containerStyles, mainColors, typographyStyles } from "@helpers/theme";
+import { NavigationProps, RegisterFormTypes } from "@interfaces/index";
+import {
+  CONTAINER_STYLES,
+  MAIN_COLORS,
+  TYPOGRAPHY_STYLES,
+} from "@helpers/theme";
 import { registerFormSchema } from "@yupSchemas/registerFormSchema";
 import RCFormikTextInput from "@atoms/RCFormikTextInput";
 import RCButton from "@atoms/RCButton";
-import { routes } from "@navigations/index";
 
 const initialValuesRegisterForm: RegisterFormTypes = {
   name: "",
@@ -17,23 +20,23 @@ const initialValuesRegisterForm: RegisterFormTypes = {
 };
 
 const RegisterTemplate = () => {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<NavigationProps["Register"]>();
 
   const handleSubmit = (values: RegisterFormTypes) => {};
   return (
     <ScrollView>
       <View
         style={[
-          containerStyles.mainContainer,
+          CONTAINER_STYLES.mainContainer,
           RegisterTemplateStyles.container,
         ]}
       >
         <View style={RegisterTemplateStyles.titleContainer}>
           <Text
             style={[
-              typographyStyles.superTitle,
+              TYPOGRAPHY_STYLES.superTitle,
               {
-                color: mainColors.quartery,
+                color: MAIN_COLORS.quartery,
               },
             ]}
           >
@@ -63,7 +66,7 @@ const RegisterTemplate = () => {
                       paddingVertical: 15,
                     },
                   }}
-                  type="quartery_button"
+                  type="quarteryButton"
                   onPress={() => handleSubmit()}
                 />
               </View>
@@ -93,7 +96,7 @@ const RegisterTemplate = () => {
               },
               textStyles: { color: "grey" },
             }}
-            onPress={() => navigation.navigate(routes.authRoutes.register.init)}
+            onPress={() => navigation.navigate("Register")}
           />
         </View>
       </View>
@@ -130,7 +133,7 @@ const RegisterTemplateStyles = StyleSheet.create({
     width: 15,
     marginBottom: 20,
     height: 15,
-    backgroundColor: mainColors.quartery,
+    backgroundColor: MAIN_COLORS.quartery,
     borderRadius: 999,
   },
   separator: {

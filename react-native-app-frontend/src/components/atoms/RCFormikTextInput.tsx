@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import RCTextInput, { RCTextInputProps } from "./RCTextInput";
-import { mainColors } from "@helpers/theme";
+import { MAIN_COLORS } from "@helpers/theme";
 import { useField } from "formik";
 
 interface RCFormikTextInputProps extends RCTextInputProps {
@@ -21,7 +21,9 @@ const RCFormikTextInput = ({
         value={field.value}
         styles={{
           borderColor:
-            meta.error && meta.touched ? mainColors.danger : styles.borderColor,
+            meta.error && meta.touched
+              ? MAIN_COLORS.danger
+              : styles.borderColor,
         }}
         onChangeText={(value) => helpers.setValue(value)}
         {...props}
@@ -38,7 +40,7 @@ const RCFormikTextInputStyles = StyleSheet.create({
     gap: 5,
   },
   errorContainer: {
-    color: mainColors.danger,
+    color: MAIN_COLORS.danger,
     fontSize: 10,
   },
 });

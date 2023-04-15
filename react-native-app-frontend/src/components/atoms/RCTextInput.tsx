@@ -7,7 +7,6 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Entypo } from "@expo/vector-icons";
-import { mainColors } from "@helpers/theme";
 
 export interface RCTextInputProps extends TextInputProps {
   styles?: ViewStyle;

@@ -1,3 +1,5 @@
+import { StackNavigationProp } from "@react-navigation/stack";
+
 export interface GetAllCharactersType {
   info: Info;
   results: Character[];
@@ -61,10 +63,29 @@ export interface RegisterFormTypes {
 }
 
 //navigation
-export interface RootStackParamList {
-  [key: string]: any; // revisar
-  Home: undefined;
+
+export type RootStackParamList = {
   Login: undefined;
+  Home: undefined;
   Register: undefined;
-  ForgotPassword: undefined;
-}
+  ForgotPassWord: undefined;
+  HomeTab: undefined;
+  Search: undefined;
+  Recipes: { recipeId: number };
+  Settings: undefined;
+};
+
+export type ScreenProp<T extends keyof RootStackParamList> = {
+  navigation: StackNavigationProp<RootStackParamList, T>;
+};
+
+export type NavigationProps = {
+  Login: StackNavigationProp<RootStackParamList, "Login">;
+  Home: StackNavigationProp<RootStackParamList, "Home">;
+  Register: StackNavigationProp<RootStackParamList, "Register">;
+  ForgotPassword: StackNavigationProp<RootStackParamList, "ForgotPassWord">;
+  HomeTab: StackNavigationProp<RootStackParamList, "HomeTab">;
+  Search: StackNavigationProp<RootStackParamList, "Search">;
+  Recipes: StackNavigationProp<RootStackParamList, "Recipes">;
+  Settings: StackNavigationProp<RootStackParamList, "Settings">;
+};

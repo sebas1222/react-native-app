@@ -7,15 +7,15 @@ import {
   TextStyle,
 } from "react-native";
 import React from "react";
-import { buttonStyles } from "@helpers/theme";
+import { BUTTON_STYLES } from "@helpers/theme";
 
 interface RCButtonProps {
   text?: string;
   type?:
-    | "primary_button"
-    | "secondary_button"
-    | "tertiary_button"
-    | "quartery_button";
+    | "primaryButton"
+    | "secondaryButton"
+    | "tertiaryButton"
+    | "quarteryButton";
   onPress: () => void;
   icon?: React.ReactNode;
   styles?: { buttonStyles?: ViewStyle; textStyles?: TextStyle };
@@ -23,7 +23,7 @@ interface RCButtonProps {
 
 const RCButton = ({
   text = "", //valores por defecto
-  type = "primary_button",
+  type = "primaryButton",
   onPress,
   icon,
   styles = { buttonStyles: {}, textStyles: {} },
@@ -40,7 +40,7 @@ const RCButton = ({
       <TouchableNativeFeedback onPress={() => onPress && onPress()}>
         <View
           style={[
-            buttonStyles[type],
+            BUTTON_STYLES[type],
             RCButtonStyles.buttonContainer,
             styles.buttonStyles,
           ]}

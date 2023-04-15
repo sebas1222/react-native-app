@@ -3,13 +3,12 @@ import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Formik } from "formik";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { LoginFormTypes, RootStackParamList } from "@interfaces/index";
-import { containerStyles, mainColors } from "@helpers/theme";
+import { LoginFormTypes, NavigationProps } from "@interfaces/index";
+import { CONTAINER_STYLES, MAIN_COLORS } from "@helpers/theme";
 import { loginFormSchema } from "@yupSchemas/loginFormSchema";
 import RCFormikTextInput from "@atoms/RCFormikTextInput";
 import RCButton from "@atoms/RCButton";
 import RCTextLink from "@atoms/RCTextLink";
-import { routes } from "@navigations/index";
 
 const initialValuesLoginForm: LoginFormTypes = {
   email: "",
@@ -17,15 +16,15 @@ const initialValuesLoginForm: LoginFormTypes = {
 };
 
 const LoginTemplate = () => {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<NavigationProps["Login"]>();
   const handleSubmitLogin = (values: LoginFormTypes) => {
     console.log(values);
-    navigation.navigate(routes.authRoutes.home.init);
+    navigation.navigate("Home");
   };
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View
-        style={[LoginTemplateStyles.container, containerStyles.mainContainer]}
+        style={[LoginTemplateStyles.container, CONTAINER_STYLES.mainContainer]}
       >
         <Image
           alt="logo"
@@ -43,12 +42,12 @@ const LoginTemplate = () => {
                 <RCFormikTextInput
                   placeholder="Email"
                   name="email"
-                  styles={{ borderColor: mainColors.quartery }}
+                  styles={{ borderColor: MAIN_COLORS.quartery }}
                 />
                 <RCFormikTextInput
                   placeholder="Contraseña"
                   name="password"
-                  styles={{ borderColor: mainColors.quartery }}
+                  styles={{ borderColor: MAIN_COLORS.quartery }}
                   secureTextEntry
                 />
                 <RCButton
@@ -59,7 +58,7 @@ const LoginTemplate = () => {
                       paddingVertical: 15,
                     },
                   }}
-                  type="quartery_button"
+                  type="quarteryButton"
                 />
                 <View style={LoginTemplateStyles.separationContainer}>
                   <Text style={LoginTemplateStyles.separatorText}>
@@ -84,19 +83,15 @@ const LoginTemplate = () => {
                       },
                       textStyles: { color: "grey" },
                     }}
-                    onPress={() =>
-                      navigation.navigate(routes.authRoutes.register.init)
-                    }
+                    onPress={() => navigation.navigate("Register")}
                   />
                 </View>
                 <View style={{ alignSelf: "center" }}>
                   <RCTextLink
                     text="¿Olvidaste tu contraseña?"
-                    onPress={() =>
-                      navigation.navigate(routes.authRoutes.register.init)
-                    }
+                    onPress={() => navigation.navigate("Register")}
                     styles={{
-                      textStyles: { fontSize: 12, color: mainColors.quartery },
+                      textStyles: { fontSize: 12, color: MAIN_COLORS.quartery },
                     }}
                   />
                 </View>
@@ -115,16 +110,16 @@ const LoginTemplate = () => {
           <RCTextLink
             text="Registrate"
             styles={{
-              textStyles: { fontSize: 12, color: mainColors.quartery },
+              textStyles: { fontSize: 12, color: MAIN_COLORS.quartery },
             }}
             icon={
               <Ionicons
                 name="arrow-forward-circle"
                 size={16}
-                color={mainColors.quartery}
+                color={MAIN_COLORS.quartery}
               />
             }
-            onPress={() => navigation.navigate(routes.authRoutes.register.init)}
+            onPress={() => navigation.navigate("Register")}
           />
         </View>
       </View>

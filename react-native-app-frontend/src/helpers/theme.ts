@@ -1,6 +1,6 @@
 import { TextStyle, ViewStyle } from "react-native";
 
-export const mainColors = {
+export const MAIN_COLORS = {
   primary: "#EA5C2B",
   secondary: "#FF7F3F",
   tertiary: "#F6D860",
@@ -9,7 +9,7 @@ export const mainColors = {
   danger: "#f24e1e",
 };
 
-export const containerStyles: { [key: string]: ViewStyle } = {
+export const CONTAINER_STYLES: { [key: string]: ViewStyle } = {
   mainContainer: {
     flex: 1, // con flex 1 indicar que el mainContainer ocupara todo el ancho y alto posible
     paddingHorizontal: 15,
@@ -17,26 +17,26 @@ export const containerStyles: { [key: string]: ViewStyle } = {
   },
 };
 
-export const buttonStyles: { [key: string]: ViewStyle } = {
-  primary_button: {
-    backgroundColor: mainColors.primary,
+export const BUTTON_STYLES: { [key: string]: ViewStyle } = {
+  primaryButton: {
+    backgroundColor: MAIN_COLORS.primary,
     padding: 8,
   },
-  secondary_button: {
-    backgroundColor: mainColors.secondary,
+  secondaryButton: {
+    backgroundColor: MAIN_COLORS.secondary,
     padding: 8,
   },
-  tertiary_button: {
-    backgroundColor: mainColors.tertiary,
+  tertiaryButton: {
+    backgroundColor: MAIN_COLORS.tertiary,
     padding: 8,
   },
-  quartery_button: {
-    backgroundColor: mainColors.quartery,
+  quarteryButton: {
+    backgroundColor: MAIN_COLORS.quartery,
     padding: 8,
   },
 };
 
-export const typographyStyles: { [key: string]: TextStyle } = {
+export const TYPOGRAPHY_STYLES: { [key: string]: TextStyle } = {
   superTitle: {
     fontSize: 60,
     fontWeight: "900",

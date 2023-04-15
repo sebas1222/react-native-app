@@ -1,26 +1,27 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather, Ionicons } from "@expo/vector-icons";
-import { routes } from ".";
-import { mainColors } from "@helpers/theme";
+import { MAIN_COLORS } from "@helpers/theme";
 import Home from "@screens/Home";
 import RCCustomTab from "@atoms/RCCustomTab";
 import Recipes from "@screens/Recipes";
 import Search from "@screens/Search";
+import { RootStackParamList } from "@interfaces/index";
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<RootStackParamList>();
 export default function BottomTabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: { alignItems: "center" },
+        headerShown: true,
       }}
-      initialRouteName={routes.homeRoutes.homeTab.init}
+      initialRouteName={"HomeTab"}
     >
       {/* <Tab.Screen name={routes.homeRoutes.homeTab.label} component={Home} />
       <Tab.Screen name={routes.homeRoutes.recipes.label} component={Recipes} /> */}
 
       <Tab.Screen
-        name={routes.homeRoutes.homeTab.label}
+        name={"HomeTab"}
         component={Home}
         options={{
           tabBarButton: (props) => (
@@ -33,7 +34,7 @@ export default function BottomTabNavigator() {
                   color={
                     props.accessibilityState?.selected
                       ? "white"
-                      : mainColors.quartery
+                      : MAIN_COLORS.quartery
                   }
                 />
               }
@@ -44,7 +45,7 @@ export default function BottomTabNavigator() {
       />
 
       <Tab.Screen
-        name={routes.homeRoutes.recipes.label}
+        name={"Recipes"}
         component={Recipes}
         options={{
           tabBarButton: (props) => (
@@ -57,7 +58,7 @@ export default function BottomTabNavigator() {
                   color={
                     props.accessibilityState?.selected
                       ? "white"
-                      : mainColors.quartery
+                      : MAIN_COLORS.quartery
                   }
                 />
               }
@@ -67,7 +68,7 @@ export default function BottomTabNavigator() {
         }}
       />
       <Tab.Screen
-        name={routes.homeRoutes.search.label}
+        name={"Search"}
         component={Search}
         options={{
           tabBarButton: (props) => (
@@ -80,7 +81,7 @@ export default function BottomTabNavigator() {
                   color={
                     props.accessibilityState?.selected
                       ? "white"
-                      : mainColors.quartery
+                      : MAIN_COLORS.quartery
                   }
                 />
               }

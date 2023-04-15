@@ -1,10 +1,9 @@
-import { mainColors } from "@helpers/theme";
+import { MAIN_COLORS } from "@helpers/theme";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import Login from "@screens/Login";
 import Register from "@screens/Register";
 import { RootStackParamList } from "@interfaces/index";
-import { routes } from ".";
 import BottomTabNavigator from "./BottomTabNavigator";
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -16,26 +15,22 @@ const AuthNavigator = () => {
         headerTintColor: "white",
         headerTitleAlign: "center",
         headerStyle: {
-          backgroundColor: mainColors.quartery,
+          backgroundColor: MAIN_COLORS.quartery,
         },
       }}
-      initialRouteName={routes.authRoutes.login.init}
+      initialRouteName="Login"
     >
       <Stack.Screen
-        name={routes.authRoutes.login.init}
-        options={{ headerTitle: routes.authRoutes.login.title }}
+        name="Login"
+        options={{ headerTitle: "Iniciar Sesión" }}
         component={Login}
       />
       <Stack.Screen
-        name={routes.authRoutes.register.init}
-        options={{ headerTitle: routes.authRoutes.register.title }}
+        name="Register"
+        options={{ headerTitle: "Registrarse" }}
         component={Register}
       />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name={routes.authRoutes.home.init}
-        component={BottomTabNavigator}
-      />
+      <Stack.Screen name="Home" component={BottomTabNavigator} />
     </Stack.Navigator>
   );
 };
