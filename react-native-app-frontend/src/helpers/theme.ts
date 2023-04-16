@@ -1,11 +1,10 @@
 import { TextStyle, ViewStyle } from "react-native";
 
 export const MAIN_COLORS = {
-  primary: "#EA5C2B",
-  secondary: "#FF7F3F",
-  tertiary: "#F6D860",
-  quartery: "#66c00b",
-  fifth: "#19191a",
+  primary: "#0BDD00",
+  secondary: "#252525",
+  tertiary: "#000000",
+  quartery: "#FFFFFF",
   danger: "#f24e1e",
 };
 

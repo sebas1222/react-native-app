@@ -15,14 +15,14 @@ const AuthNavigator = () => {
         headerTintColor: "white",
         headerTitleAlign: "center",
         headerStyle: {
-          backgroundColor: MAIN_COLORS.quartery,
+          backgroundColor: MAIN_COLORS.primary,
         },
       }}
       initialRouteName="Login"
     >
       <Stack.Screen
         name="Login"
-        options={{ headerTitle: "Iniciar Sesión" }}
+        options={{ headerTitle: "Iniciar Sesión", headerShown: false }}
         component={Login}
       />
       <Stack.Screen

@@ -2,9 +2,9 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableNativeFeedback,
   ViewStyle,
   TextStyle,
+  TouchableNativeFeedback,
 } from "react-native";
 import React from "react";
 import { BUTTON_STYLES } from "@helpers/theme";
@@ -37,7 +37,7 @@ const RCButton = ({
           RCButtonStyles.buttonContainer.borderRadius,
       }}
     >
-      <TouchableNativeFeedback onPress={() => onPress && onPress()}>
+      <TouchableNativeFeedback onPress={() => onPress()}>
         <View
           style={[
             BUTTON_STYLES[type],

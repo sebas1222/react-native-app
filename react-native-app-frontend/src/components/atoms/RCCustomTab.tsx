@@ -30,7 +30,7 @@ const RCCustomTabStyles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   tabSelected: {
-    backgroundColor: MAIN_COLORS.quartery,
+    backgroundColor: MAIN_COLORS.primary,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },

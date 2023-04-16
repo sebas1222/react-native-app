@@ -7,6 +7,7 @@ import {
   ViewStyle,
 } from "react-native";
 import React from "react";
+import { MAIN_COLORS } from "@helpers/theme";
 
 interface RCTextLinkProps {
   text: string;
@@ -22,7 +23,7 @@ const RCTextLink = ({
   icon,
 }: RCTextLinkProps) => {
   return (
-    <TouchableOpacity activeOpacity={0.6} onPress={() => onPress && onPress()}>
+    <TouchableOpacity activeOpacity={0.4} onPress={() => onPress && onPress()}>
       <View style={[RCTextLinkStyles.container, styles?.linkStyles]}>
         <Text style={[RCTextLinkStyles.text, styles?.textStyles]}>{text}</Text>
         {icon && icon}
@@ -37,8 +38,8 @@ const RCTextLinkStyles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
-    fontWeight: "normal",
-    color: "black",
+    fontWeight: "bold",
+    color: MAIN_COLORS.primary,
   },
 });
 

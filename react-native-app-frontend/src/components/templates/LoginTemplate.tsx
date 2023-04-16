@@ -9,6 +9,7 @@ import { loginFormSchema } from "@yupSchemas/loginFormSchema";
 import RCFormikTextInput from "@atoms/RCFormikTextInput";
 import RCButton from "@atoms/RCButton";
 import RCTextLink from "@atoms/RCTextLink";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const initialValuesLoginForm: LoginFormTypes = {
   email: "",
@@ -22,108 +23,116 @@ const LoginTemplate = () => {
     navigation.navigate("Home");
   };
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <View
-        style={[LoginTemplateStyles.container, CONTAINER_STYLES.mainContainer]}
-      >
-        <Image
-          alt="logo"
-          style={LoginTemplateStyles.image}
-          source={require("../../assets/logos/logo.png")}
-        ></Image>
-        <Formik
-          initialValues={initialValuesLoginForm}
-          onSubmit={handleSubmitLogin}
-          validationSchema={loginFormSchema}
+    <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View
+          style={[
+            LoginTemplateStyles.container,
+            CONTAINER_STYLES.mainContainer,
+          ]}
         >
-          {({ handleSubmit }) => {
-            return (
-              <View style={LoginTemplateStyles.formContainer}>
-                <RCFormikTextInput
-                  placeholder="Email"
-                  name="email"
-                  styles={{ borderColor: MAIN_COLORS.quartery }}
-                />
-                <RCFormikTextInput
-                  placeholder="Contraseña"
-                  name="password"
-                  styles={{ borderColor: MAIN_COLORS.quartery }}
-                  secureTextEntry
-                />
-                <RCButton
-                  onPress={() => handleSubmit()}
-                  text="Iniciar Sesión"
-                  styles={{
-                    buttonStyles: {
-                      paddingVertical: 15,
-                    },
-                  }}
-                  type="quarteryButton"
-                />
-                <View style={LoginTemplateStyles.separationContainer}>
-                  <Text style={LoginTemplateStyles.separatorText}>
-                    o continúa con
-                  </Text>
-                  <View style={LoginTemplateStyles.separator}></View>
-                </View>
-                <View style={LoginTemplateStyles.authsContainer}>
+          <Image
+            alt="logo"
+            style={LoginTemplateStyles.image}
+            source={require("../../assets/logos/logo.png")}
+          ></Image>
+          <Formik
+            initialValues={initialValuesLoginForm}
+            onSubmit={handleSubmitLogin}
+            validationSchema={loginFormSchema}
+          >
+            {({ handleSubmit }) => {
+              return (
+                <View style={LoginTemplateStyles.formContainer}>
+                  <RCFormikTextInput
+                    placeholder="Email"
+                    name="email"
+                    styles={{ borderColor: MAIN_COLORS.secondary }}
+                  />
+                  <RCFormikTextInput
+                    placeholder="Contraseña"
+                    name="password"
+                    styles={{ borderColor: MAIN_COLORS.secondary }}
+                    secureTextEntry
+                  />
                   <RCButton
-                    text="Iniciar sesión con Google"
-                    icon={
-                      <Image
-                        alt="google_logo"
-                        style={LoginTemplateStyles.authIconImage}
-                        source={require("../../assets/logos/google.png")}
-                      />
-                    }
+                    onPress={() => handleSubmit()}
+                    text="Iniciar Sesión"
                     styles={{
                       buttonStyles: {
-                        backgroundColor: "white",
-                        flexDirection: "row-reverse",
+                        paddingVertical: 15,
                       },
-                      textStyles: { color: "grey" },
                     }}
-                    onPress={() => navigation.navigate("Register")}
+                    type="tertiaryButton"
                   />
+                  <View style={LoginTemplateStyles.separationContainer}>
+                    <Text style={LoginTemplateStyles.separatorText}>
+                      o continúa con
+                    </Text>
+                    <View style={LoginTemplateStyles.separator}></View>
+                  </View>
+                  <View style={LoginTemplateStyles.authsContainer}>
+                    <RCButton
+                      text="Iniciar sesión con Google"
+                      icon={
+                        <Image
+                          alt="google_logo"
+                          style={LoginTemplateStyles.authIconImage}
+                          source={require("../../assets/logos/google.png")}
+                        />
+                      }
+                      styles={{
+                        buttonStyles: {
+                          backgroundColor: "white",
+                          flexDirection: "row-reverse",
+                        },
+                        textStyles: { color: "grey" },
+                      }}
+                      onPress={() => navigation.navigate("Register")}
+                    />
+                  </View>
+                  <View style={{ alignSelf: "center" }}>
+                    <RCTextLink
+                      text="¿Olvidaste tu contraseña?"
+                      onPress={() => navigation.navigate("Register")}
+                      styles={{
+                        textStyles: {
+                          fontSize: 12,
+                          fontWeight: "bold",
+                        },
+                      }}
+                    />
+                  </View>
                 </View>
-                <View style={{ alignSelf: "center" }}>
-                  <RCTextLink
-                    text="¿Olvidaste tu contraseña?"
-                    onPress={() => navigation.navigate("Register")}
-                    styles={{
-                      textStyles: { fontSize: 12, color: MAIN_COLORS.quartery },
-                    }}
-                  />
-                </View>
-              </View>
-            );
-          }}
-        </Formik>
-        <View style={LoginTemplateStyles.registerOption}>
-          <Text
-            style={{
-              fontSize: 12,
+              );
             }}
-          >
-            ¿Eres nuevo?
-          </Text>
-          <RCTextLink
-            text="Registrate"
-            styles={{
-              textStyles: { fontSize: 12, color: MAIN_COLORS.quartery },
-            }}
-            icon={
-              <Ionicons
-                name="arrow-forward-circle"
-                size={16}
-                color={MAIN_COLORS.quartery}
-              />
-            }
-            onPress={() => navigation.navigate("Register")}
-          />
+          </Formik>
+          <View style={LoginTemplateStyles.registerOption}>
+            <Text
+              style={{
+                fontSize: 12,
+              }}
+            >
+              ¿Eres nuevo?
+            </Text>
+            <RCTextLink
+              text="Registrate"
+              styles={{
+                textStyles: { fontSize: 12 },
+              }}
+              icon={
+                <Ionicons
+                  name="arrow-forward-circle"
+                  size={16}
+                  color={MAIN_COLORS.primary}
+                />
+              }
+              onPress={() => navigation.navigate("Register")}
+            />
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -169,7 +178,6 @@ const LoginTemplateStyles = StyleSheet.create({
   registerOption: {
     alignSelf: "center",
     flexDirection: "row",
-    alignItems: "center",
     gap: 5,
   },
   image: {

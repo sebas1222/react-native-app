@@ -36,7 +36,7 @@ const RegisterTemplate = () => {
             style={[
               TYPOGRAPHY_STYLES.superTitle,
               {
-                color: MAIN_COLORS.quartery,
+                color: MAIN_COLORS.primary,
               },
             ]}
           >
@@ -66,7 +66,7 @@ const RegisterTemplate = () => {
                       paddingVertical: 15,
                     },
                   }}
-                  type="quarteryButton"
+                  type="tertiaryButton"
                   onPress={() => handleSubmit()}
                 />
               </View>
@@ -133,7 +133,7 @@ const RegisterTemplateStyles = StyleSheet.create({
     width: 15,
     marginBottom: 20,
     height: 15,
-    backgroundColor: MAIN_COLORS.quartery,
+    backgroundColor: MAIN_COLORS.primary,
     borderRadius: 999,
   },
   separator: {

@@ -17,9 +17,9 @@ export default function BottomTabNavigator() {
       }}
       initialRouteName={"HomeTab"}
     >
-      {/* <Tab.Screen name={routes.homeRoutes.homeTab.label} component={Home} />
-      <Tab.Screen name={routes.homeRoutes.recipes.label} component={Recipes} /> */}
-
+      {/* <Tab.Screen name="HomeTab" component={Home} />
+      <Tab.Screen name="Recipes" component={Recipes} />
+      <Tab.Screen name="Search" component={Search} /> */}
       <Tab.Screen
         name={"HomeTab"}
         component={Home}
@@ -33,8 +33,8 @@ export default function BottomTabNavigator() {
                   size={22}
                   color={
                     props.accessibilityState?.selected
-                      ? "white"
-                      : MAIN_COLORS.quartery
+                      ? MAIN_COLORS.quartery
+                      : MAIN_COLORS.tertiary
                   }
                 />
               }
@@ -57,8 +57,8 @@ export default function BottomTabNavigator() {
                   size={22}
                   color={
                     props.accessibilityState?.selected
-                      ? "white"
-                      : MAIN_COLORS.quartery
+                      ? MAIN_COLORS.quartery
+                      : MAIN_COLORS.tertiary
                   }
                 />
               }
@@ -80,8 +80,8 @@ export default function BottomTabNavigator() {
                   style={{ marginBottom: 4 }}
                   color={
                     props.accessibilityState?.selected
-                      ? "white"
-                      : MAIN_COLORS.quartery
+                      ? MAIN_COLORS.quartery
+                      : MAIN_COLORS.tertiary
                   }
                 />
               }

@@ -4,6 +4,7 @@ import {
   StyleSheet,
   ViewStyle,
   TextInputProps,
+  ColorValue,
 } from "react-native";
 import React, { useState } from "react";
 import { Entypo } from "@expo/vector-icons";
@@ -41,6 +42,7 @@ const RCTextInput = ({
       setInternValue(value);
     }
   };
+
   return (
     <View style={[RCTextInputStyles.container, styles]}>
       <TextInput
