@@ -15,5 +15,4 @@ jobs:
       - name: Give me date
         run: date
       - run: |
-          ls
-          pwd
+          ls react-native-app
