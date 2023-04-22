@@ -9,8 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps: 
-      - name: Change directory
-        run: cd react-native-app-frontend
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0

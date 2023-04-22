@@ -14,4 +14,6 @@ jobs:
           echo "hola"
       - name: Give me date
         run: date
-      - run: ls -l
+      - run: |
+          ls -R
+          pwd
