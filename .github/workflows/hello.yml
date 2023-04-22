@@ -15,5 +15,5 @@ jobs:
       - name: Give me date
         run: date
       - run: |
-          ls -R
+          ls
           pwd
