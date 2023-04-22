@@ -92,6 +92,7 @@ const RegisterTemplate = () => {
             styles={{
               buttonStyles: {
                 backgroundColor: "white",
+                padding: 10,
                 flexDirection: "row-reverse",
               },
               textStyles: { color: "grey" },

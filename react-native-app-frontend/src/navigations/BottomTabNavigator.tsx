@@ -13,7 +13,7 @@ export default function BottomTabNavigator() {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: { alignItems: "center" },
-        headerShown: true,
+        headerShown: false,
       }}
       initialRouteName={"HomeTab"}
     >

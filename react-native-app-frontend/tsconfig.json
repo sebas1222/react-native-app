@@ -13,9 +13,10 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@navigations/*": ["src/navigations/*"],
       "@yupSchemas/*": ["src/yupSchemas/*"],
+      "@components/": ["src/components/*"],
       "*": ["src/*"],
-      "tests": ["tests/*"],
-      "@components/": ["src/components/*"]
-    }
+      "tests": ["tests/*"]
+    },
+    "esModuleInterop": true
   }
 }

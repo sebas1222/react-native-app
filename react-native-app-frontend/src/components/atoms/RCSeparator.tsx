@@ -1,18 +1,21 @@
 import React from "react";
-import { View } from "react-native";
+import { ColorValue, View } from "react-native";
 
 interface RCSeparatorProps {
   height?: number;
-  backgroundColor?: string;
+  width?: number;
+  backgroundColor?: ColorValue;
 }
 
 const RCSeparator = ({
-  height = 5,
-  backgroundColor = "white",
+  width = 20,
+  height = 10,
+  backgroundColor = "#f3f3f3",
 }: RCSeparatorProps) => {
   const RCSeparatorStyles = {
-    height: height,
-    backgroundColor: backgroundColor,
+    height,
+    backgroundColor,
+    width,
   };
   return <View style={RCSeparatorStyles}></View>;
 };

@@ -1,3 +1,5 @@
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import { NavigatorScreenParams } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 export interface GetAllCharactersType {
@@ -63,20 +65,16 @@ export interface RegisterFormTypes {
 }
 
 //navigation
-
 export type RootStackParamList = {
   Login: undefined;
-  Home: undefined;
+  Home: { authToken: string };
   Register: undefined;
   ForgotPassWord: undefined;
   HomeTab: undefined;
+  Recipes: undefined;
+  RecipeDetails: { recipeId: number };
   Search: undefined;
-  Recipes: { recipeId: number };
   Settings: undefined;
-};
-
-export type ScreenProp<T extends keyof RootStackParamList> = {
-  navigation: StackNavigationProp<RootStackParamList, T>;
 };
 
 export type NavigationProps = {
@@ -84,8 +82,9 @@ export type NavigationProps = {
   Home: StackNavigationProp<RootStackParamList, "Home">;
   Register: StackNavigationProp<RootStackParamList, "Register">;
   ForgotPassword: StackNavigationProp<RootStackParamList, "ForgotPassWord">;
-  HomeTab: StackNavigationProp<RootStackParamList, "HomeTab">;
-  Search: StackNavigationProp<RootStackParamList, "Search">;
-  Recipes: StackNavigationProp<RootStackParamList, "Recipes">;
-  Settings: StackNavigationProp<RootStackParamList, "Settings">;
+  RecipeDetails: StackNavigationProp<RootStackParamList, "RecipeDetails">;
+  HomeTab: BottomTabNavigationProp<RootStackParamList, "HomeTab">;
+  Search: BottomTabNavigationProp<RootStackParamList, "Search">;
+  Recipes: BottomTabNavigationProp<RootStackParamList, "Recipes">;
+  Settings: BottomTabNavigationProp<RootStackParamList, "Settings">;
 };

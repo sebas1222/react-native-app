@@ -16,22 +16,40 @@ export const CONTAINER_STYLES: { [key: string]: ViewStyle } = {
   },
 };
 
-export const BUTTON_STYLES: { [key: string]: ViewStyle } = {
+export const BUTTON_STYLES: {
+  [key: string]: { containerStyle: ViewStyle; textStyle: TextStyle };
+} = {
   primaryButton: {
-    backgroundColor: MAIN_COLORS.primary,
-    padding: 8,
+    containerStyle: {
+      backgroundColor: MAIN_COLORS.primary,
+    },
+    textStyle: {
+      color: MAIN_COLORS.quartery,
+    },
   },
   secondaryButton: {
-    backgroundColor: MAIN_COLORS.secondary,
-    padding: 8,
+    containerStyle: {
+      backgroundColor: MAIN_COLORS.secondary,
+    },
+    textStyle: {
+      color: MAIN_COLORS.quartery,
+    },
   },
   tertiaryButton: {
-    backgroundColor: MAIN_COLORS.tertiary,
-    padding: 8,
+    containerStyle: {
+      backgroundColor: MAIN_COLORS.tertiary,
+    },
+    textStyle: {
+      color: MAIN_COLORS.quartery,
+    },
   },
   quarteryButton: {
-    backgroundColor: MAIN_COLORS.quartery,
-    padding: 8,
+    containerStyle: {
+      backgroundColor: MAIN_COLORS.quartery,
+    },
+    textStyle: {
+      color: MAIN_COLORS.tertiary,
+    },
   },
 };
 
@@ -47,16 +65,13 @@ export const TYPOGRAPHY_STYLES: { [key: string]: TextStyle } = {
   title: {
     fontSize: 26,
     fontWeight: "900",
-    textAlign: "center",
   },
   subtitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "700",
-    textAlign: "center",
   },
   paragraph: {
-    fontSize: 16,
     fontWeight: "normal",
-    textAlign: "left",
+    lineHeight: 20,
   },
 };

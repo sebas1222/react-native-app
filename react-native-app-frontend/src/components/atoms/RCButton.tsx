@@ -7,7 +7,7 @@ import {
   TouchableNativeFeedback,
 } from "react-native";
 import React from "react";
-import { BUTTON_STYLES } from "@helpers/theme";
+import { BUTTON_STYLES, MAIN_COLORS } from "@helpers/theme";
 
 interface RCButtonProps {
   text?: string;
@@ -15,7 +15,8 @@ interface RCButtonProps {
     | "primaryButton"
     | "secondaryButton"
     | "tertiaryButton"
-    | "quarteryButton";
+    | "quarteryButton"
+    | null;
   onPress: () => void;
   icon?: React.ReactNode;
   styles?: { buttonStyles?: ViewStyle; textStyles?: TextStyle };
@@ -23,7 +24,7 @@ interface RCButtonProps {
 
 const RCButton = ({
   text = "", //valores por defecto
-  type = "primaryButton",
+  type,
   onPress,
   icon,
   styles = { buttonStyles: {}, textStyles: {} },
@@ -37,15 +38,25 @@ const RCButton = ({
           RCButtonStyles.buttonContainer.borderRadius,
       }}
     >
-      <TouchableNativeFeedback onPress={() => onPress()}>
+      <TouchableNativeFeedback
+        testID="RCButton_touchable"
+        onPress={() => onPress()}
+      >
         <View
           style={[
-            BUTTON_STYLES[type],
             RCButtonStyles.buttonContainer,
+            type && BUTTON_STYLES[type].containerStyle,
+
             styles.buttonStyles,
           ]}
         >
-          <Text style={[RCButtonStyles.buttonText, styles.textStyles]}>
+          <Text
+            style={[
+              RCButtonStyles.buttonText,
+              type && BUTTON_STYLES[type].textStyle,
+              styles.textStyles,
+            ]}
+          >
             {text}
           </Text>
           {icon && icon}
@@ -60,12 +71,13 @@ const RCButtonStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    padding: 8,
     borderRadius: 8,
     gap: 2,
   },
   buttonText: {
-    color: "white",
     fontWeight: "700",
+    color: MAIN_COLORS.tertiary,
   },
 });
 

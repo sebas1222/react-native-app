@@ -1,5 +1,5 @@
 import RCSeparator from "@atoms/RCSeparator";
-import { mainColors } from "@helpers/theme";
+import { MAIN_COLORS } from "@helpers/theme";
 import { Character, GetAllCharactersType } from "@interfaces/index";
 import React, { useEffect, useState } from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
@@ -39,7 +39,7 @@ const TodoList = () => {
           ListFooterComponentStyle={{ marginBottom: 60 }}
           data={characterInfo}
           ItemSeparatorComponent={() => (
-            <RCSeparator height={20} backgroundColor={mainColors.quartery} />
+            <RCSeparator height={20} backgroundColor={MAIN_COLORS.quartery} />
           )}
           renderItem={(
             { item: character } //con renderitem cada elemento recibe el nombre de item siempre:
@@ -67,7 +67,7 @@ const TodoList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: mainColors.quartery,
+    backgroundColor: MAIN_COLORS.quartery,
   },
   cardContainer: {
     padding: 10,

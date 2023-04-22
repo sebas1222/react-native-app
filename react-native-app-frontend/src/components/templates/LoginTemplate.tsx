@@ -17,10 +17,10 @@ const initialValuesLoginForm: LoginFormTypes = {
 };
 
 const LoginTemplate = () => {
-  const navigation = useNavigation<NavigationProps["Login"]>();
+  const navigation = useNavigation<NavigationProps["Home"]>();
   const handleSubmitLogin = (values: LoginFormTypes) => {
     console.log(values);
-    navigation.navigate("Home");
+    navigation.navigate("Home", { authToken: "ga" });
   };
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
