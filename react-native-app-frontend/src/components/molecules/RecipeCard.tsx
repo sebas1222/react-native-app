@@ -32,7 +32,7 @@ const RecipeCard = () => {
               icon={<MaterialIcons name="favorite" size={24} color="white" />}
               onPress={() => console.log("Favorito añadido")}
             />
-          </View>
+          </View> 
           <View style={RecipeCardStyles.imageLayoutContainer}>
             <Text
               numberOfLines={3}
