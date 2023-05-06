@@ -5,7 +5,6 @@ import Login from "@screens/Login";
 import Register from "@screens/Register";
 import { RootStackParamList } from "@interfaces/index";
 import BottomTabNavigator from "./BottomTabNavigator";
-import Recipes from "@screens/Recipes";
 import RecipeDetails from "@screens/RecipeDetails";
 
 const Stack = createStackNavigator<RootStackParamList>();
