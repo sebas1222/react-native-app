@@ -1,16 +1,19 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import React, { useState } from "react";
+import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
+import React, { useState, useEffect } from "react";
 import { TYPOGRAPHY_STYLES } from "@helpers/theme";
 import { FontAwesome5 } from "@expo/vector-icons";
 import RCButton from "@atoms/RCButton";
 import RecipeImagesSlider from "@organisms/RecipeImagesSlider";
 
-const RecipeDetailsTemplate = () => {
+const RecipeDetailsTemplate = (props: any) => {
   const [currentInfo, setCurrentInfo] = useState<string>("Ingredientes");
+  const {item} = props;
+ 
+
   return (
     <View style={RecipeDetailsTemplateStyles.container}>
       <View style={RecipeDetailsTemplateStyles.sliderContainer}>
-        <RecipeImagesSlider />
+        {item.image != "" ? <Image source={item.image} style={RecipeDetailsTemplateStyles.image} />:<RecipeImagesSlider />}
       </View>
       <View style={{ flex: 0.6 }}>
         <ScrollView
@@ -21,18 +24,16 @@ const RecipeDetailsTemplate = () => {
           <View style={RecipeDetailsTemplateStyles.primaryInfoContainer}>
             <View style={RecipeDetailsTemplateStyles.topContainer}>
               <View style={{ flex: 1 }}>
-                <Text style={TYPOGRAPHY_STYLES.title}>Healthy Taco Salad</Text>
+                <Text style={TYPOGRAPHY_STYLES.title}>{item.name}</Text>
               </View>
               <View style={RecipeDetailsTemplateStyles.timeContainer}>
                 <FontAwesome5 name="clock" size={20} color="black" />
-                <Text>15 Min</Text>
+                <Text>{item.time}</Text>
               </View>
             </View>
             <View>
               <Text style={TYPOGRAPHY_STYLES.paragraph}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit
-                Dignissimos veritatis totam voluptates dolorem enim eveniet
-                iusto illo rerum fuga.
+                {item.description}
               </Text>
             </View>
             <View style={{ gap: 10 }}>
@@ -168,6 +169,10 @@ const RecipeDetailsTemplateStyles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
   },
+  image: {
+    width: '100%',
+    height: '100%'
+  }
 });
 
 export default RecipeDetailsTemplate;
