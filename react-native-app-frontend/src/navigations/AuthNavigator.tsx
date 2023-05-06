@@ -35,7 +35,7 @@ const AuthNavigator = () => {
       <Stack.Screen name="Home" component={BottomTabNavigator} />
       <Stack.Screen
         name="RecipeDetails"
-        options={{ presentation: "modal" }}
+        options={{ presentation: "modal", headerTitle: "Detalles" }}
         component={RecipeDetails}
       />
     </Stack.Navigator>

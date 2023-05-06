@@ -1,7 +1,7 @@
 import { TextStyle, ViewStyle } from "react-native";
 
 export const MAIN_COLORS = {
-  primary: "#0BDD00",
+  primary: "#FF8400",
   secondary: "#252525",
   tertiary: "#000000",
   quartery: "#FFFFFF",
@@ -25,6 +25,15 @@ export const BUTTON_STYLES: {
     },
     textStyle: {
       color: MAIN_COLORS.quartery,
+    },
+  },
+  primaryButtonInner: {
+    containerStyle: {
+      backgroundColor: MAIN_COLORS.quartery,
+      borderColor: MAIN_COLORS.primary,
+    },
+    textStyle: {
+      color: MAIN_COLORS.primary,
     },
   },
   secondaryButton: {

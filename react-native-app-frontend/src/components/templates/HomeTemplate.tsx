@@ -6,8 +6,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import CallToActionCard from "@molecules/CallToActionCard";
+import { Recipe } from "@interfaces/index";
 
-const HomeTemplate = () => {
+interface HomeTemplateProps {
+  allRecipes: Recipe[];
+}
+
+const HomeTemplate = ({ allRecipes }: HomeTemplateProps) => {
+  console.log("acaaa", allRecipes);
   return (
     <ScrollView contentContainerStyle={HomeTemplateStyles.container}>
       <CallToActionCard
@@ -57,8 +63,8 @@ const HomeTemplate = () => {
           />
         </ScrollView>
       </View>
-      <RecipeCardList titleList="Popular" />
-      <RecipeCardList titleList="Para tí" />
+      <RecipeCardList recipesData={allRecipes} titleList="Popular" />
+      <RecipeCardList recipesData={allRecipes} titleList="Para tí" />
     </ScrollView>
   );
 };

@@ -13,7 +13,9 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@navigations/*": ["src/navigations/*"],
       "@yupSchemas/*": ["src/yupSchemas/*"],
-      "@components/": ["src/components/*"],
+      "@components/*": ["src/components/*"],
+      "@api/*": ["src/api/*"],
+      "@context/*": ["src/context/*"],
       "*": ["src/*"],
       "tests": ["tests/*"]
     },

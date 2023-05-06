@@ -1,5 +1,4 @@
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { NavigatorScreenParams } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 export interface GetAllCharactersType {
@@ -63,6 +62,59 @@ export interface RegisterFormTypes {
   password: string;
   re_password: string;
 }
+export interface AddRecipeFormTypes {
+  name: string;
+  description: string;
+  duration: number;
+  category: CategoryTypes;
+  ingredients: Array<IngredientRecipeTypes>;
+  steps: Array<StepRecipeTypes>;
+}
+export interface CategoryTypes {
+  id: string;
+  name: string;
+}
+export interface StepRecipeTypes {
+  description: string;
+  id: string;
+}
+export interface IngredientRecipeTypes {
+  name: string;
+  id: string;
+}
+
+//Categories
+
+export interface Category {
+  id: string;
+  name: string;
+}
+
+//Recipes
+export interface Recipe {
+  id: string;
+  author: {
+    id: string;
+    name: string;
+  };
+  name: string;
+  description: string;
+  category: {
+    id: string;
+    name: string;
+  };
+  duration: number;
+  ingredients: string[];
+  steps: {
+    description: string;
+    step_number: number;
+  }[];
+  images: string[];
+  likes: {
+    id: string;
+    name: string;
+  }[];
+}
 
 //navigation
 export type RootStackParamList = {
@@ -70,9 +122,9 @@ export type RootStackParamList = {
   Home: { authToken: string };
   Register: undefined;
   ForgotPassWord: undefined;
-  HomeTab: undefined;
-  Recipes: undefined;
-  RecipeDetails: { recipeId: number };
+  HomeTab: { authToken: string };
+  Recipes: { authToken: string };
+  RecipeDetails: { recipeData: Recipe };
   Search: undefined;
   Settings: undefined;
 };

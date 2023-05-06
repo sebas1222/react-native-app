@@ -8,17 +8,21 @@ import {
 } from "react-native";
 import React from "react";
 import { BUTTON_STYLES, MAIN_COLORS } from "@helpers/theme";
+import { ActivityIndicator } from "react-native";
 
 interface RCButtonProps {
   text?: string;
   type?:
     | "primaryButton"
+    | "primaryButtonInner"
     | "secondaryButton"
     | "tertiaryButton"
     | "quarteryButton"
     | null;
   onPress: () => void;
   icon?: React.ReactNode;
+  disabled?: boolean;
+  loading?: boolean;
   styles?: { buttonStyles?: ViewStyle; textStyles?: TextStyle };
 }
 
@@ -26,7 +30,9 @@ const RCButton = ({
   text = "", //valores por defecto
   type,
   onPress,
+  disabled,
   icon,
+  loading,
   styles = { buttonStyles: {}, textStyles: {} },
 }: RCButtonProps) => {
   return (
@@ -40,26 +46,30 @@ const RCButton = ({
     >
       <TouchableNativeFeedback
         testID="RCButton_touchable"
+        disabled={disabled || false}
         onPress={() => onPress()}
       >
         <View
           style={[
             RCButtonStyles.buttonContainer,
             type && BUTTON_STYLES[type].containerStyle,
-
             styles.buttonStyles,
           ]}
         >
-          <Text
-            style={[
-              RCButtonStyles.buttonText,
-              type && BUTTON_STYLES[type].textStyle,
-              styles.textStyles,
-            ]}
-          >
-            {text}
-          </Text>
+          {text && (
+            <Text
+              style={[
+                RCButtonStyles.buttonText,
+                type && BUTTON_STYLES[type].textStyle,
+                styles.textStyles,
+              ]}
+            >
+              {text}
+            </Text>
+          )}
+
           {icon && icon}
+          {loading && <ActivityIndicator color={MAIN_COLORS.quartery} />}
         </View>
       </TouchableNativeFeedback>
     </View>
@@ -73,7 +83,9 @@ const RCButtonStyles = StyleSheet.create({
     justifyContent: "center",
     padding: 8,
     borderRadius: 8,
-    gap: 2,
+    borderWidth: 2,
+    borderColor: "transparent",
+    gap: 5,
   },
   buttonText: {
     fontWeight: "700",

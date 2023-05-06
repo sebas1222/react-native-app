@@ -1,16 +1,20 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { TYPOGRAPHY_STYLES } from "@helpers/theme";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome5, AntDesign } from "@expo/vector-icons";
 import RCButton from "@atoms/RCButton";
 import RecipeImagesSlider from "@organisms/RecipeImagesSlider";
+import { RouteProp, useRoute } from "@react-navigation/native";
+import { RootStackParamList } from "@interfaces/index";
 
 const RecipeDetailsTemplate = () => {
   const [currentInfo, setCurrentInfo] = useState<string>("Ingredientes");
+  const route = useRoute<RouteProp<RootStackParamList, "RecipeDetails">>();
+  const { recipeData } = route.params;
   return (
     <View style={RecipeDetailsTemplateStyles.container}>
       <View style={RecipeDetailsTemplateStyles.sliderContainer}>
-        <RecipeImagesSlider />
+        <RecipeImagesSlider dataImages={recipeData?.images} />
       </View>
       <View style={{ flex: 0.6 }}>
         <ScrollView
@@ -21,66 +25,34 @@ const RecipeDetailsTemplate = () => {
           <View style={RecipeDetailsTemplateStyles.primaryInfoContainer}>
             <View style={RecipeDetailsTemplateStyles.topContainer}>
               <View style={{ flex: 1 }}>
-                <Text style={TYPOGRAPHY_STYLES.title}>Healthy Taco Salad</Text>
+                <Text style={TYPOGRAPHY_STYLES.title}>{recipeData.name}</Text>
               </View>
               <View style={RecipeDetailsTemplateStyles.timeContainer}>
                 <FontAwesome5 name="clock" size={20} color="black" />
-                <Text>15 Min</Text>
+                <Text>{recipeData.duration} Min</Text>
               </View>
             </View>
             <View>
               <Text style={TYPOGRAPHY_STYLES.paragraph}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit
-                Dignissimos veritatis totam voluptates dolorem enim eveniet
-                iusto illo rerum fuga.
+                {recipeData.description}
               </Text>
             </View>
             <View style={{ gap: 10 }}>
-              <View
-                style={RecipeDetailsTemplateStyles.nutritionalInfoContainer}
-              >
-                <View
-                  style={RecipeDetailsTemplateStyles.itemNutritionalContainer}
-                >
+              <View style={RecipeDetailsTemplateStyles.boxesContainer}>
+                <View style={RecipeDetailsTemplateStyles.itemBoxContainer}>
                   <View style={RecipeDetailsTemplateStyles.itemNutritionalLogo}>
-                    <FontAwesome5 name="clock" size={20} color="grey" />
+                    <AntDesign name="user" size={24} color="black" />
                   </View>
                   <View>
-                    <Text>70g carbs</Text>
+                    <Text>{recipeData.author?.name}</Text>
                   </View>
                 </View>
-                <View
-                  style={RecipeDetailsTemplateStyles.itemNutritionalContainer}
-                >
+                <View style={RecipeDetailsTemplateStyles.itemBoxContainer}>
                   <View style={RecipeDetailsTemplateStyles.itemNutritionalLogo}>
-                    <FontAwesome5 name="clock" size={20} color="grey" />
+                    <AntDesign name="filter" size={24} color="black" />
                   </View>
                   <View>
-                    <Text>65g carbs</Text>
-                  </View>
-                </View>
-              </View>
-              <View
-                style={RecipeDetailsTemplateStyles.nutritionalInfoContainer}
-              >
-                <View
-                  style={RecipeDetailsTemplateStyles.itemNutritionalContainer}
-                >
-                  <View style={RecipeDetailsTemplateStyles.itemNutritionalLogo}>
-                    <FontAwesome5 name="clock" size={20} color="grey" />
-                  </View>
-                  <View>
-                    <Text>70g carbs</Text>
-                  </View>
-                </View>
-                <View
-                  style={RecipeDetailsTemplateStyles.itemNutritionalContainer}
-                >
-                  <View style={RecipeDetailsTemplateStyles.itemNutritionalLogo}>
-                    <FontAwesome5 name="clock" size={20} color="grey" />
-                  </View>
-                  <View>
-                    <Text>65g carbs</Text>
+                    <Text>{recipeData.category?.name}</Text>
                   </View>
                 </View>
               </View>
@@ -110,10 +82,24 @@ const RecipeDetailsTemplate = () => {
               }}
             />
           </View>
-          <View>
+          <View style={RecipeDetailsTemplateStyles.bottomInfo}>
             <Text style={TYPOGRAPHY_STYLES.subtitle}>
               {currentInfo === "Preparación" ? "Preparación" : "Ingredientes"}
             </Text>
+            {currentInfo === "Preparación"
+              ? recipeData.steps &&
+                recipeData.steps.map((step, index) => {
+                  return (
+                    <Text key={index}>
+                      {" "}
+                      {step.step_number}- {step.description}
+                    </Text>
+                  );
+                })
+              : recipeData.ingredients &&
+                recipeData.ingredients.map((ingredient, index) => {
+                  return <Text key={index}>- {ingredient}</Text>;
+                })}
           </View>
         </ScrollView>
       </View>
@@ -146,10 +132,10 @@ const RecipeDetailsTemplateStyles = StyleSheet.create({
     flexDirection: "row",
     gap: 5,
   },
-  nutritionalInfoContainer: {
+  boxesContainer: {
     flexDirection: "row",
   },
-  itemNutritionalContainer: {
+  itemBoxContainer: {
     flexDirection: "row",
     alignItems: "center",
     flex: 0.5,
@@ -159,6 +145,9 @@ const RecipeDetailsTemplateStyles = StyleSheet.create({
     backgroundColor: "#f3f3f3",
     padding: 10,
     borderRadius: 10,
+  },
+  bottomInfo: {
+    gap: 10,
   },
   changeContainer: {
     backgroundColor: "#f3f3f3",

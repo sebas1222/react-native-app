@@ -5,7 +5,6 @@ import {
   StyleSheet,
   View,
   ViewToken,
-  useWindowDimensions,
   Dimensions,
 } from "react-native";
 import React, { memo, useRef, useState } from "react";
@@ -13,12 +12,7 @@ import data from "../organisms/datafake.json";
 import { MAIN_COLORS } from "@helpers/theme";
 const { width } = Dimensions.get("window");
 
-interface ImageSliderItemProps {
-  title: string;
-  url: string;
-}
-
-const ImageSlider: React.FC<{ item: ImageSliderItemProps; index: number }> = ({
+const ImageSlider: React.FC<{ item: string; index: number }> = ({
   item,
   index,
 }) => {
@@ -31,15 +25,17 @@ const ImageSlider: React.FC<{ item: ImageSliderItemProps; index: number }> = ({
     >
       <Image
         resizeMode="cover"
-        source={{ uri: item.url }}
+        source={{ uri: item }}
         style={[ImageSliderStyles.image]}
       ></Image>
     </TouchableOpacity>
   );
 };
-
-const RecipeImagesSlider = () => {
-  const flatListRef = useRef<FlatList<ImageSliderItemProps> | null>(null);
+interface RecipeImageSliderProps {
+  dataImages: string[];
+}
+const RecipeImagesSlider = ({ dataImages }: RecipeImageSliderProps) => {
+  const flatListRef = useRef<FlatList | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const handleScroll = (index: number) => {
@@ -61,15 +57,17 @@ const RecipeImagesSlider = () => {
         pagingEnabled
         ref={(ref) => (flatListRef.current = ref)}
         horizontal
-        data={data}
-        renderItem={ImageSlider}
+        data={dataImages}
+        renderItem={({ item: dataImage, index }) => (
+          <ImageSlider item={dataImage} index={index} />
+        )}
         onViewableItemsChanged={onViewRef.current}
         viewabilityConfig={{ viewAreaCoveragePercentThreshold: 100 }}
         // viewAreaCoveragePercentThreshold define qué porcentaje de un elemento debe estar visible para considerarse "visible" por FlatList
       ></FlatList>
       <View style={ImageSliderStyles.dotsContainer}>
-        {data &&
-          data.map((item, index) => {
+        {dataImages &&
+          dataImages.map((item, index) => {
             return (
               <TouchableOpacity
                 activeOpacity={0.5}

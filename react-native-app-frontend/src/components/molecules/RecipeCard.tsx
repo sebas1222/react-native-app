@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   ImageBackground,
   TouchableNativeFeedback,
@@ -10,20 +9,26 @@ import React from "react";
 import { TYPOGRAPHY_STYLES } from "@helpers/theme";
 import RCButton from "@atoms/RCButton";
 import { MaterialIcons } from "@expo/vector-icons";
-import { NavigationProps } from "@interfaces/index";
+import { NavigationProps, Recipe } from "@interfaces/index";
 import { useNavigation } from "@react-navigation/native";
 
-const RecipeCard = () => {
+interface RecipeCardProps {
+  data: Recipe;
+}
+
+const RecipeCard = ({ data }: RecipeCardProps) => {
   const navigation = useNavigation<NavigationProps["RecipeDetails"]>();
   return (
     <ImageBackground
       blurRadius={2}
       resizeMode="cover"
       style={RecipeCardStyles.recipeCardContainer}
-      source={require("../../assets/recipe.jpg")}
+      source={{ uri: data.images[0] }}
     >
       <TouchableNativeFeedback
-        onPress={() => navigation.navigate("RecipeDetails", { recipeId: 2 })}
+        onPress={() =>
+          navigation.navigate("RecipeDetails", { recipeData: data })
+        }
       >
         <View style={RecipeCardStyles.imageMask}>
           <View style={RecipeCardStyles.imageFavButtonContainer}>
@@ -38,10 +43,10 @@ const RecipeCard = () => {
               numberOfLines={3}
               style={[TYPOGRAPHY_STYLES.title, { color: "white" }]}
             >
-              Causa Limeña de pulpa de cangrejo
+              {data?.name}
             </Text>
             <Text numberOfLines={1} style={{ color: "white", fontSize: 12 }}>
-              5 ingredientes | 40min
+              {data.ingredients?.length} ingredientes | {data?.duration} mins
             </Text>
           </View>
         </View>
@@ -56,7 +61,7 @@ const RecipeCardStyles = StyleSheet.create({
     borderRadius: 10,
     overflow: "hidden",
     position: "relative",
-    aspectRatio: 1 / 1.6,
+    aspectRatio: 1 / 1.4,
   },
   imageMask: {
     backgroundColor: "rgba(0, 0, 0, 0.3)",

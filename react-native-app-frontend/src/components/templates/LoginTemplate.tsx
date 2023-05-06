@@ -10,6 +10,8 @@ import RCFormikTextInput from "@atoms/RCFormikTextInput";
 import RCButton from "@atoms/RCButton";
 import RCTextLink from "@atoms/RCTextLink";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../../api/queries";
 
 const initialValuesLoginForm: LoginFormTypes = {
   email: "",
@@ -18,10 +20,18 @@ const initialValuesLoginForm: LoginFormTypes = {
 
 const LoginTemplate = () => {
   const navigation = useNavigation<NavigationProps["Home"]>();
-  const handleSubmitLogin = (values: LoginFormTypes) => {
-    console.log(values);
-    navigation.navigate("Home", { authToken: "ga" });
+  const [LoginUser, { loading, error }] = useMutation(LOGIN_USER);
+
+  const handleSubmitLogin = async (values: LoginFormTypes) => {
+    try {
+      const result = await LoginUser({ variables: { credentials: values } });
+      const token = result.data.loginUser.value;
+      navigation.navigate("Home", { authToken: token });
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -36,6 +46,9 @@ const LoginTemplate = () => {
             style={LoginTemplateStyles.image}
             source={require("../../assets/logos/logo.png")}
           ></Image>
+          <Text style={LoginTemplateStyles.errorMessage}>
+            {error && error.graphQLErrors[0].extensions.error}
+          </Text>
           <Formik
             initialValues={initialValuesLoginForm}
             onSubmit={handleSubmitLogin}
@@ -58,6 +71,7 @@ const LoginTemplate = () => {
                   <RCButton
                     onPress={() => handleSubmit()}
                     text="Iniciar Sesión"
+                    loading={loading}
                     styles={{
                       buttonStyles: {
                         paddingVertical: 15,
@@ -145,6 +159,10 @@ const LoginTemplateStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     gap: 10,
+  },
+  errorMessage: {
+    color: MAIN_COLORS.danger,
+    textAlign: "center",
   },
   authIconImage: {
     width: 40,

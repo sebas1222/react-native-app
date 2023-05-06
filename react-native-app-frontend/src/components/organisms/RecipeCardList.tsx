@@ -1,28 +1,26 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import React from "react";
-import { ScrollView } from "react-native-gesture-handler";
 import RecipeCard from "@molecules/RecipeCard";
-import RCSeparator from "@atoms/RCSeparator";
 import { TYPOGRAPHY_STYLES } from "@helpers/theme";
+import { Recipe } from "@interfaces/index";
 
 interface RecipeCardListProps {
   titleList: string;
-  recipesData?: any; //cambiar al tipo de dato del recipeItem de la Api
+  recipesData: Recipe[]; //cambiar al tipo de dato del recipeItem de la Api
 }
 
 const RecipeCardList = ({ titleList, recipesData }: RecipeCardListProps) => {
+  console.log(recipesData);
   return (
     <View style={RecipeCardListStyles.container}>
       <Text style={TYPOGRAPHY_STYLES.subtitle}>{titleList}</Text>
-      <ScrollView horizontal contentContainerStyle={{ gap: 20 }}>
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-      </ScrollView>
+      <FlatList
+        horizontal
+        nestedScrollEnabled={true}
+        contentContainerStyle={RecipeCardListStyles.container}
+        data={recipesData}
+        renderItem={({ item: recipe }) => <RecipeCard data={recipe} />}
+      ></FlatList>
     </View>
   );
 };

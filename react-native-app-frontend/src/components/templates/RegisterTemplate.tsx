@@ -11,6 +11,8 @@ import {
 import { registerFormSchema } from "@yupSchemas/registerFormSchema";
 import RCFormikTextInput from "@atoms/RCFormikTextInput";
 import RCButton from "@atoms/RCButton";
+import { useMutation } from "@apollo/client";
+import { REGISTER_USER } from "@api/queries";
 
 const initialValuesRegisterForm: RegisterFormTypes = {
   name: "",
@@ -20,9 +22,27 @@ const initialValuesRegisterForm: RegisterFormTypes = {
 };
 
 const RegisterTemplate = () => {
-  const navigation = useNavigation<NavigationProps["Register"]>();
+  const navigation = useNavigation<NavigationProps["Login"]>();
+  const [RegisterUser, { data, loading, error }] = useMutation(REGISTER_USER);
 
-  const handleSubmit = (values: RegisterFormTypes) => {};
+  const handleSubmit = async (values: RegisterFormTypes) => {
+    console.log(values);
+    try {
+      await RegisterUser({
+        variables: {
+          credentials: {
+            name: values.name,
+            email: values.email,
+            password: values.password,
+          },
+        },
+      });
+      navigation.navigate("Login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(data);
   return (
     <ScrollView>
       <View
@@ -42,8 +62,12 @@ const RegisterTemplate = () => {
           >
             Registrate
           </Text>
+
           <View style={RegisterTemplateStyles.circle}></View>
         </View>
+        <Text style={RegisterTemplateStyles.errorMessage}>
+          {error && error.graphQLErrors[0].extensions.error}
+        </Text>
         <Formik
           onSubmit={handleSubmit}
           validationSchema={registerFormSchema}
@@ -54,13 +78,19 @@ const RegisterTemplate = () => {
               <View style={[RegisterTemplateStyles.formContainer]}>
                 <RCFormikTextInput placeholder="Nombre" name="name" />
                 <RCFormikTextInput placeholder="Email" name="email" />
-                <RCFormikTextInput placeholder="Contraseña" name="password" />
+                <RCFormikTextInput
+                  placeholder="Contraseña"
+                  name="password"
+                  secureTextEntry
+                />
                 <RCFormikTextInput
                   placeholder="Confirmar contraseña"
                   name="re_password"
+                  secureTextEntry
                 />
                 <RCButton
                   text="Registrarme"
+                  loading={loading}
                   styles={{
                     buttonStyles: {
                       paddingVertical: 15,
@@ -116,6 +146,10 @@ const RegisterTemplateStyles = StyleSheet.create({
   },
   formContainer: {
     gap: 10,
+  },
+  errorMessage: {
+    color: MAIN_COLORS.danger,
+    textAlign: "center",
   },
   separationContainer: {
     position: "relative",

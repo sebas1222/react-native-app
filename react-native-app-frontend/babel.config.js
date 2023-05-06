@@ -21,6 +21,8 @@ module.exports = function (api) {
             "@interfaces": "./src/interfaces",
             "@navigations": "./src/navigations",
             "@yupSchemas": "./src/yupSchemas",
+            "@api": "./src/api",
+            "@context": "./src/context",
           },
         },
       ],
