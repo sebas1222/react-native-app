@@ -21,5 +21,5 @@ jobs:
         run: npm run eslint
       - name: instal eas
         run: npm install -global eas-cli
-      - name: Build android
-        run: eas build -p android --profile preview
+      #- name: Build android
+      #  run: eas build -p android --profile preview --non-interactive
