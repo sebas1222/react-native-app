@@ -8,16 +8,11 @@ const RCButtonIcon = (props: any) => {
     return(
     <View
     >
-      <TouchableNativeFeedback
-        testID="RCButtonIcon_touchable"
-        onPress={() => onPress()}
-      >
         <View
             style={[RCButtonIconStyles.buttonText]}
         >
           <AntDesign name="caretright" size={24} color={MAIN_COLORS.primary} />
         </View>
-      </TouchableNativeFeedback>
     </View>        
     );
 };
