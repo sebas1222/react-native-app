@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import React, { useState } from "react";
+import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
+import React, { useState, useEffect } from "react";
 import { TYPOGRAPHY_STYLES } from "@helpers/theme";
 import { FontAwesome5, AntDesign } from "@expo/vector-icons";
 import RCButton from "@atoms/RCButton";
@@ -7,14 +7,14 @@ import RecipeImagesSlider from "@organisms/RecipeImagesSlider";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { RootStackParamList } from "@interfaces/index";
 
-const RecipeDetailsTemplate = () => {
+const RecipeDetailsTemplate = (props: any) => {
   const [currentInfo, setCurrentInfo] = useState<string>("Ingredientes");
   const route = useRoute<RouteProp<RootStackParamList, "RecipeDetails">>();
   const { recipeData } = route.params;
   return (
     <View style={RecipeDetailsTemplateStyles.container}>
       <View style={RecipeDetailsTemplateStyles.sliderContainer}>
-        <RecipeImagesSlider dataImages={recipeData?.images} />
+      {recipeData.image != null ? <Image source={recipeData.image} style={RecipeDetailsTemplateStyles.image} />:<RecipeImagesSlider dataImages={recipeData?.images} />}
       </View>
       <View style={{ flex: 0.6 }}>
         <ScrollView
@@ -157,6 +157,10 @@ const RecipeDetailsTemplateStyles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
   },
+  image: {
+    width: '100%',
+    height: '100%'
+  }
 });
 
 export default RecipeDetailsTemplate;

@@ -3,9 +3,10 @@ import { MAIN_COLORS, TYPOGRAPHY_STYLES } from "@helpers/theme";
 import RecipeCardList from "@organisms/RecipeCardList";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import CallToActionCard from "@molecules/CallToActionCard";
+import HorizontalCard from "@molecules/HorizontalCard";
 import { Recipe } from "@interfaces/index";
 
 interface HomeTemplateProps {
@@ -63,8 +64,45 @@ const HomeTemplate = ({ allRecipes }: HomeTemplateProps) => {
           />
         </ScrollView>
       </View>
+
       <RecipeCardList recipesData={allRecipes} titleList="Popular" />
       <RecipeCardList recipesData={allRecipes} titleList="Para tí" />
+      <HorizontalCard 
+        toAction={() => console.log("Ir a recetas")}
+        autor="Paco Jimenez"
+        foodName="Hamburguesa"
+        foodType="Fritura"
+        icon={<Image
+          source={require(`../../assets/Hamburguer.png`)}
+      />}
+      />
+     <HorizontalCard 
+        toAction={() => console.log("Ir a recetas")}
+        autor="Paco Jimenez"
+        foodName="Hamburguesa"
+        foodType="Fritura"
+        icon={<Image
+          source={require(`../../assets/Hamburguer.png`)}
+      />}
+      />
+      <HorizontalCard 
+        toAction={() => console.log("Ir a recetas")}
+        autor="Paco Jimenez"
+        foodName="Hamburguesa"
+        foodType="Fritura"
+        icon={<Image
+          source={require(`../../assets/Hamburguer.png`)}
+      />}
+      />
+      <HorizontalCard 
+        toAction={() => console.log("Ir a recetas")}
+        autor="Paco Jimenez"
+        foodName="Hamburguesa"
+        foodType="Fritura"
+        icon={<Image
+          source={require(`../../assets/Hamburguer.png`)}
+      />}
+      />
     </ScrollView>
   );
 };
