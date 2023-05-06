@@ -19,5 +19,7 @@ jobs:
         run: npm install
       - name: Lint
         run: npm run eslint
+      - name: instal eas
+        run: npm install -global eas-cli
       - name: Build android
         run: eas build -p android --profile preview
