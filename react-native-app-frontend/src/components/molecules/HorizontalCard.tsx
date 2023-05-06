@@ -18,7 +18,7 @@ const HorizontalCard = (props: any) => {
           name: "",
         },
         name: "Hamburguesa",
-        description: "",
+        description: "Hamburguesa Angus cubierta con queso mozzarella y cheddar, con jalapeños y tiritas de cebolla crujiente, bañadas con aderezo ranch. Servida en pan Kaiser tostado con lechuga y tomates.",
         category: {
           id: "",
           name: "Fritura",
