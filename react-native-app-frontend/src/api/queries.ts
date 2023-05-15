@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 //USERS
 
@@ -13,13 +13,16 @@ export const GET_ALL_USERS = gql`
       id
       name
       email
+      avatar
       followers {
         id
         name
+        avatar
       }
       following {
         id
         name
+        avatar
       }
     }
   }
@@ -30,13 +33,36 @@ export const GET_ONE_USER = gql`
       id
       name
       email
-      followers {
-        id
-        name
-      }
+      avatar
       following {
         id
         name
+        avatar
+        followers {
+          id
+          name
+          avatar
+        }
+        following {
+          id
+          name
+          avatar
+        }
+      }
+      followers {
+        id
+        name
+        avatar
+        followers {
+          id
+          name
+          avatar
+        }
+        following {
+          id
+          name
+          avatar
+        }
       }
     }
   }
@@ -45,7 +71,21 @@ export const GET_ONE_USER = gql`
 export const LOGIN_USER = gql`
   mutation LoginUser($credentials: LoginUserInput) {
     loginUser(credentials: $credentials) {
-      value
+      authToken
+      userInfo {
+        id
+        name
+        email
+        avatar
+        followers {
+          id
+          name
+        }
+        following {
+          id
+          name
+        }
+      }
     }
   }
 `;
@@ -57,6 +97,50 @@ export const REGISTER_USER = gql`
   }
 `;
 
+export const UPDATE_USER_AVATAR = gql`
+  mutation UpdateUserAvatar($avatarUri: String!) {
+    updateAvatar(avatarUri: $avatarUri) {
+      avatar
+    }
+  }
+`;
+
+export const FOLLOW_USER = gql`
+  mutation FollowUser($idUser: ID!) {
+    followUser(idUser: $idUser) {
+      id
+      name
+      email
+      avatar
+      following {
+        id
+        name
+      }
+      followers {
+        id
+        name
+      }
+    }
+  }
+`;
+export const UNFOLLOW_USER = gql`
+  mutation UnfollowUser($idUser: ID!) {
+    unFollowUser(idUser: $idUser) {
+      id
+      name
+      email
+      avatar
+      following {
+        id
+        name
+      }
+      followers {
+        id
+        name
+      }
+    }
+  }
+`;
 //CATEGORIES
 
 export const GET_ONE_RECIPE = gql`
@@ -126,9 +210,38 @@ export const GET_ALL_RECIPES = gql`
     }
   }
 `;
+export const GET_USER_RECIPES = gql`
+  query ($idUser: ID!) {
+    recipesByUser(idUser: $idUser) {
+      id
+      author {
+        id
+        name
+      }
+      name
+      description
+      category {
+        id
+        name
+      }
+      duration
+      ingredients
+      steps {
+        description
+        step_number
+      }
+      images
+      likes {
+        id
+        name
+      }
+    }
+  }
+`;
 export const POST_RECIPE = gql`
   mutation PostRecipe($info: RecipeInput) {
     createRecipe(info: $info) {
+      id
       name
       description
       duration

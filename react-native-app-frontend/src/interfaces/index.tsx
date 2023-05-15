@@ -1,56 +1,9 @@
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { StackNavigationProp } from '@react-navigation/stack';
+import * as ImagePicker from 'expo-image-picker';
+import { TextStyle, ViewStyle } from 'react-native';
 
-export interface GetAllCharactersType {
-  info: Info;
-  results: Character[];
-}
-
-export interface Info {
-  count: number;
-  next: string;
-  pages: number;
-  prev: null;
-}
-
-export interface Character {
-  created: Date;
-  episode: string[];
-  gender: Gender;
-  id: number;
-  image: string;
-  location: Location;
-  name: string;
-  origin: Location;
-  species: Species;
-  status: Status;
-  type: string;
-  url: string;
-}
-
-export enum Gender {
-  Female = "Female",
-  Male = "Male",
-  Unknown = "unknown",
-}
-
-export interface Location {
-  name: string;
-  url: string;
-}
-
-export enum Species {
-  Alien = "Alien",
-  Human = "Human",
-}
-
-export enum Status {
-  Alive = "Alive",
-  Dead = "Dead",
-  Unknown = "unknown",
-}
-
-//
+//Tipado de formularios
 export interface LoginFormTypes {
   email: string;
   password: string;
@@ -67,13 +20,11 @@ export interface AddRecipeFormTypes {
   description: string;
   duration: number;
   category: CategoryTypes;
-  ingredients: Array<IngredientRecipeTypes>;
-  steps: Array<StepRecipeTypes>;
+  ingredients: IngredientRecipeTypes[];
+  steps: StepRecipeTypes[];
+  images: ImagePicker.ImagePickerAsset[];
 }
-export interface CategoryTypes {
-  id: string;
-  name: string;
-}
+
 export interface StepRecipeTypes {
   description: string;
   id: string;
@@ -83,15 +34,14 @@ export interface IngredientRecipeTypes {
   id: string;
 }
 
-//Categories
+//Tipado de data traida de la BD
 
-export interface Category {
+export interface CategoryTypes {
   id: string;
   name: string;
 }
 
-//Recipes
-export interface Recipe {
+export interface RecipeTypes {
   id: string;
   author: {
     id: string;
@@ -114,30 +64,98 @@ export interface Recipe {
     id: string;
     name: string;
   }[];
-  image?: any;
+}
+
+export interface UserTypes {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  following: UserTypes[];
+  followers: UserTypes[];
+}
+
+export interface TokenObjectTypes {
+  _id: string;
+  name: string;
+  avatar: string;
+  email: string;
+  followers: string[];
+  following: string[];
+}
+
+//Tipado para fines de componetización
+export interface SelectDataTypes {
+  id: string;
+  value: string;
+  valueLabel: string;
+}
+
+export interface TextInputListItemTypes {
+  id: string;
+  value: string;
+}
+
+//Tipado para redux
+
+export interface AuthStateTypes {
+  authToken: string;
+}
+
+export interface RootReducerTypes {
+  auth: AuthStateTypes;
 }
 
 //navigation
 export type RootStackParamList = {
   Login: undefined;
-  Home: { authToken: string };
+  Home: undefined;
   Register: undefined;
   ForgotPassWord: undefined;
-  HomeTab: { authToken: string };
-  Recipes: { authToken: string };
-  RecipeDetails: { recipeData: Recipe };
+  HomeTab: undefined;
+  AddRecipe: undefined;
+  RecipeDetails: { recipeId: string };
+  UserPerfil: { userId: string };
   Search: undefined;
   Settings: undefined;
 };
 
 export type NavigationProps = {
-  Login: StackNavigationProp<RootStackParamList, "Login">;
-  Home: StackNavigationProp<RootStackParamList, "Home">;
-  Register: StackNavigationProp<RootStackParamList, "Register">;
-  ForgotPassword: StackNavigationProp<RootStackParamList, "ForgotPassWord">;
-  RecipeDetails: StackNavigationProp<RootStackParamList, "RecipeDetails">;
-  HomeTab: BottomTabNavigationProp<RootStackParamList, "HomeTab">;
-  Search: BottomTabNavigationProp<RootStackParamList, "Search">;
-  Recipes: BottomTabNavigationProp<RootStackParamList, "Recipes">;
-  Settings: BottomTabNavigationProp<RootStackParamList, "Settings">;
+  Login: StackNavigationProp<RootStackParamList, 'Login'>;
+  Home: StackNavigationProp<RootStackParamList, 'Home'>;
+  Register: StackNavigationProp<RootStackParamList, 'Register'>;
+  ForgotPassword: StackNavigationProp<RootStackParamList, 'ForgotPassWord'>;
+  RecipeDetails: StackNavigationProp<RootStackParamList, 'RecipeDetails'>;
+  HomeTab: BottomTabNavigationProp<RootStackParamList, 'HomeTab'>;
+  Search: BottomTabNavigationProp<RootStackParamList, 'Search'>;
+  AddRecipe: BottomTabNavigationProp<RootStackParamList, 'AddRecipe'>;
+  Settings: BottomTabNavigationProp<RootStackParamList, 'Settings'>;
+  UserPerfil: BottomTabNavigationProp<RootStackParamList, 'UserPerfil'>;
+};
+
+// Tipado de estilos globales
+
+export type TypographyStylesTypes = {
+  superTitle: TextStyle;
+  megaTitle: TextStyle;
+  title: TextStyle;
+  subtitle: TextStyle;
+  paragraph: TextStyle;
+};
+
+export type ButtonStylesTypes = {
+  primaryButton: ButtonType;
+  primaryButtonInner: ButtonType;
+  secondaryButton: ButtonType;
+  tertiaryButton: ButtonType;
+  quarteryButton: ButtonType;
+};
+
+type ButtonType = {
+  containerStyle: ViewStyle;
+  textStyle: TextStyle;
+};
+
+export type ContainerStylesTypes = {
+  mainContainer: ViewStyle;
 };

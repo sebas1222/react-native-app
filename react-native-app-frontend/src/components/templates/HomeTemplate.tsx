@@ -1,131 +1,59 @@
-import RCButton from "@atoms/RCButton";
-import { MAIN_COLORS, TYPOGRAPHY_STYLES } from "@helpers/theme";
-import RecipeCardList from "@organisms/RecipeCardList";
-import React from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import CallToActionCard from "@molecules/CallToActionCard";
-import HorizontalCard from "@molecules/HorizontalCard";
-import { Recipe } from "@interfaces/index";
+import React, { useState } from 'react';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { SafeAreaView, StyleSheet, ScrollView, Text, View } from 'react-native';
+import CallToActionCard from '@molecules/CallToActionCard';
+import HorizontalCard from '@molecules/HorizontalCard';
+import { CategoryTypes, NavigationProps, RecipeTypes } from '@interfaces/index';
+import CategoriesList from '@organisms/CategoriesList';
+import { CONTAINER_STYLES, MAIN_COLORS, TYPOGRAPHY_STYLES } from '@helpers/theme';
+import { useNavigation } from '@react-navigation/native';
+import RecipeList from '@organisms/RecipeList';
 
 interface HomeTemplateProps {
-  allRecipes: Recipe[];
+  allRecipes: RecipeTypes[];
+  allCategories: CategoryTypes[];
 }
 
-const HomeTemplate = ({ allRecipes }: HomeTemplateProps) => {
-  console.log("acaaa", allRecipes);
-  return (
-    <ScrollView contentContainerStyle={HomeTemplateStyles.container}>
-      <CallToActionCard
-        action="¿Qué esperas? Crea y comparte tu receta con el mundo."
-        toAction={() => console.log("Ir a recetas")}
-        buttonType="primaryButton"
-        icon={
-          <MaterialCommunityIcons name="food-variant" size={54} color="white" />
-        }
-      />
-      <View style={HomeTemplateStyles.categoriesContainer}>
-        <Text style={TYPOGRAPHY_STYLES.subtitle}>Categorías</Text>
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          contentContainerStyle={{ gap: 20 }}
-        >
-          <RCButton
-            type="tertiaryButton"
-            text="Todo"
-            onPress={() => console.log("category")}
-          />
-          <RCButton
-            type="quarteryButton"
-            text="Vegetariana"
-            onPress={() => console.log("category")}
-          />
-          <RCButton
-            type="quarteryButton"
-            text="Carne"
-            onPress={() => console.log("category")}
-          />
-          <RCButton
-            type="quarteryButton"
-            text="Pastas"
-            onPress={() => console.log("category")}
-          />
-          <RCButton
-            type="quarteryButton"
-            text="Marina"
-            onPress={() => console.log("category")}
-          />
-          <RCButton
-            type="quarteryButton"
-            text="Frituras"
-            onPress={() => console.log("category")}
-          />
-        </ScrollView>
-      </View>
+const HomeTemplate = ({ allRecipes, allCategories }: HomeTemplateProps) => {
+  const [categorySelected, setCategorySelected] = useState<string>('Todos');
+  const navigation = useNavigation<NavigationProps['AddRecipe']>();
 
-      <RecipeCardList recipesData={allRecipes} titleList="Popular" />
-      <RecipeCardList recipesData={allRecipes} titleList="Para tí" />
-      <HorizontalCard 
-        toAction={() => console.log("Ir a recetas")}
-        autor="Paco Jimenez"
-        foodName="Hamburguesa"
-        foodType="Fritura"
-        icon={<Image
-          source={require(`../../assets/Hamburguer.png`)}
-      />}
-      />
-     <HorizontalCard 
-        toAction={() => console.log("Ir a recetas")}
-        autor="Paco Jimenez"
-        foodName="Hamburguesa"
-        foodType="Fritura"
-        icon={<Image
-          source={require(`../../assets/Hamburguer.png`)}
-      />}
-      />
-      <HorizontalCard 
-        toAction={() => console.log("Ir a recetas")}
-        autor="Paco Jimenez"
-        foodName="Hamburguesa"
-        foodType="Fritura"
-        icon={<Image
-          source={require(`../../assets/Hamburguer.png`)}
-      />}
-      />
-      <HorizontalCard 
-        toAction={() => console.log("Ir a recetas")}
-        autor="Paco Jimenez"
-        foodName="Hamburguesa"
-        foodType="Fritura"
-        icon={<Image
-          source={require(`../../assets/Hamburguer.png`)}
-      />}
-      />
-    </ScrollView>
+  return (
+    <SafeAreaView style={CONTAINER_STYLES.mainContainer}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={HomeTemplateStyles.container}
+      >
+        <CallToActionCard
+          description="¿Qué esperas? Crea y comparte tu receta con el mundo."
+          backGroundColor={MAIN_COLORS.quartery}
+          toAction={() => navigation.navigate('AddRecipe')}
+          buttonType="primaryButton"
+          icon={
+            <MaterialCommunityIcons name="food-variant" size={54} color={MAIN_COLORS.primary} />
+          }
+        />
+        <CategoriesList
+          optionSelected={categorySelected}
+          dataCategories={allCategories}
+          handleChangeOption={(value) => setCategorySelected(value)}
+        />
+        <View style={HomeTemplateStyles.listRecipesContainer}>
+          <Text style={TYPOGRAPHY_STYLES.subtitle}>Popular</Text>
+          <RecipeList orientation="horizontal" dataRecipes={allRecipes} />
+        </View>
+        <HorizontalCard dataRecipe={allRecipes[0]} />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const HomeTemplateStyles = StyleSheet.create({
   container: {
-    padding: 20,
     gap: 20,
   },
-  categoriesContainer: {
+  listRecipesContainer: {
     gap: 20,
-  },
-  callToCreateContainer: {
-    flexDirection: "row",
-    backgroundColor: MAIN_COLORS.tertiary,
-    padding: 20,
-    gap: 20,
-    alignItems: "center",
-    borderRadius: 10,
-  },
-  callToCreateLayout: {
-    flex: 1,
-    gap: 10,
   },
 });
 

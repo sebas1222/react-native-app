@@ -6,28 +6,17 @@ import {
   View,
   ViewToken,
   Dimensions,
-} from "react-native";
-import React, { memo, useRef, useState } from "react";
-import data from "../organisms/datafake.json";
-import { MAIN_COLORS } from "@helpers/theme";
-const { width } = Dimensions.get("window");
+} from 'react-native';
+import React, { memo, useRef, useState } from 'react';
+import { MAIN_COLORS } from '@helpers/theme';
+const { width } = Dimensions.get('window');
 
-const ImageSlider: React.FC<{ item: string; index: number }> = ({
-  item,
-  index,
-}) => {
+const ImageSlider: React.FC<{ item: string }> = ({ item }) => {
   //evaluar luego
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.7}
-      onPress={() => console.log("clicked")}
-    >
-      <Image
-        resizeMode="cover"
-        source={{ uri: item }}
-        style={[ImageSliderStyles.image]}
-      ></Image>
+    <TouchableOpacity activeOpacity={0.7} onPress={() => console.log('clicked')}>
+      <Image resizeMode="cover" source={{ uri: item }} style={[ImageSliderStyles.image]}></Image>
     </TouchableOpacity>
   );
 };
@@ -43,7 +32,6 @@ const RecipeImagesSlider = ({ dataImages }: RecipeImageSliderProps) => {
   };
   const onViewRef = useRef(
     (info: { viewableItems: Array<ViewToken>; changed: Array<ViewToken> }) => {
-      console.log(info);
       if (info.changed[0].isViewable) {
         setCurrentIndex(info.viewableItems[0].index || 0);
       }
@@ -53,14 +41,13 @@ const RecipeImagesSlider = ({ dataImages }: RecipeImageSliderProps) => {
   return (
     <View>
       <FlatList
+        nestedScrollEnabled={true}
         showsHorizontalScrollIndicator={false}
         pagingEnabled
         ref={(ref) => (flatListRef.current = ref)}
         horizontal
         data={dataImages}
-        renderItem={({ item: dataImage, index }) => (
-          <ImageSlider item={dataImage} index={index} />
-        )}
+        renderItem={({ item: dataImage }) => <ImageSlider item={dataImage} />}
         onViewableItemsChanged={onViewRef.current}
         viewabilityConfig={{ viewAreaCoveragePercentThreshold: 100 }}
         // viewAreaCoveragePercentThreshold define qué porcentaje de un elemento debe estar visible para considerarse "visible" por FlatList
@@ -69,11 +56,7 @@ const RecipeImagesSlider = ({ dataImages }: RecipeImageSliderProps) => {
         {dataImages &&
           dataImages.map((item, index) => {
             return (
-              <TouchableOpacity
-                activeOpacity={0.5}
-                key={index}
-                onPress={() => handleScroll(index)}
-              >
+              <TouchableOpacity activeOpacity={0.5} key={index} onPress={() => handleScroll(index)}>
                 <View
                   style={
                     currentIndex === index
@@ -94,13 +77,13 @@ const RecipeImagesSlider = ({ dataImages }: RecipeImageSliderProps) => {
 
 const ImageSliderStyles = StyleSheet.create({
   image: {
-    height: "100%",
+    height: '100%',
     width,
   },
   dotsContainer: {
-    position: "absolute",
-    flexDirection: "row",
-    alignSelf: "center",
+    position: 'absolute',
+    flexDirection: 'row',
+    alignSelf: 'center',
     gap: 10,
     bottom: 10,
   },

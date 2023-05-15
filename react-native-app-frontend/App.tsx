@@ -1,21 +1,38 @@
-import React from "react";
-import "react-native-gesture-handler";
-import AuthNavigator from "@navigations/AuthNavigator";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { NavigationContainer } from "@react-navigation/native";
+import React from 'react';
+import 'react-native-gesture-handler';
+import AuthNavigator from '@navigations/AuthNavigator';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux';
+import store, { Persistor } from './src/redux/store/index';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const client = new ApolloClient({
-  uri: "http://10.0.2.2:3000/",
-  cache: new InMemoryCache({}),
+  uri: 'https://graphql-server-icook-production.up.railway.app/',
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          GetOneUser: {
+            merge: true,
+          },
+        },
+      },
+    },
+  }),
 });
 
 const App = () => {
   return (
-    <ApolloProvider client={client}>
-      <NavigationContainer>
-        <AuthNavigator />
-      </NavigationContainer>
-    </ApolloProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={Persistor}>
+        <ApolloProvider client={client}>
+          <NavigationContainer>
+            <AuthNavigator />
+          </NavigationContainer>
+        </ApolloProvider>
+      </PersistGate>
+    </Provider>
   );
 };
 export default App;

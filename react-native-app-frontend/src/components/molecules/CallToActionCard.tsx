@@ -1,74 +1,33 @@
-import { View, Text, TextStyle, StyleSheet, ViewStyle } from "react-native";
-import React from "react";
-import RCButton from "@atoms/RCButton";
-import { MAIN_COLORS, TYPOGRAPHY_STYLES } from "@helpers/theme";
+import { View, Text, StyleSheet, ColorValue } from 'react-native';
+import React from 'react';
+import RCButton from '@atoms/RCButton';
+import { MAIN_COLORS, TYPOGRAPHY_STYLES } from '@helpers/theme';
+import { ButtonStylesTypes } from '@interfaces/index';
 
 interface CallToActionCardProps {
   icon?: React.ReactNode;
-  styles?: {
-    callToActionContainerStyles?: ViewStyle;
-    textStyles?: TextStyle;
-    iconContainerStyles?: ViewStyle;
-    buttonContainerStyles?: {
-      buttonStyles?: ViewStyle;
-      textStyles?: TextStyle;
-    };
-  };
-  buttonType?:
-    | "primaryButton"
-    | "secondaryButton"
-    | "tertiaryButton"
-    | "quarteryButton";
+  description: string;
+  backGroundColor?: ColorValue;
+  buttonType?: keyof ButtonStylesTypes;
   buttonText?: string;
-  action: string;
   toAction: () => void;
 }
 
 const CallToActionCard = ({
   icon,
-  styles,
-  buttonType,
-  action = "Ir a la acción",
+  description = 'Ir a la acción',
+  backGroundColor,
+  buttonType = 'primaryButton',
+  buttonText = 'Llevame allá',
   toAction,
-  buttonText = "Llevame allá",
 }: CallToActionCardProps) => {
   return (
-    <View
-      style={[
-        CallToActionStyles.container,
-        styles && styles.callToActionContainerStyles,
-      ]}
-    >
-      <Text
-        style={[
-          CallToActionStyles.textContainer,
-          TYPOGRAPHY_STYLES.subtitle,
-          styles && styles.textStyles,
-        ]}
-      >
-        {action}
+    <View style={[CallToActionStyles.container, { backgroundColor: backGroundColor }]}>
+      <Text style={[CallToActionStyles.textContainer, TYPOGRAPHY_STYLES.subtitle]}>
+        {description}
       </Text>
-      <View
-        style={[
-          CallToActionStyles.iconContainer,
-          styles && styles.iconContainerStyles,
-        ]}
-      >
-        {icon}
-      </View>
-      <RCButton
-        text={buttonText}
-        styles={{
-          buttonStyles:
-            styles?.buttonContainerStyles &&
-            styles.buttonContainerStyles.buttonStyles,
-          textStyles:
-            styles?.buttonContainerStyles &&
-            styles.buttonContainerStyles.textStyles,
-        }}
-        onPress={() => toAction()}
-        type={buttonType}
-      />
+      <View style={[CallToActionStyles.iconContainer]}>{icon}</View>
+      <RCButton text={buttonText} onPress={() => toAction()} type={buttonType} />
     </View>
   );
 };
@@ -78,13 +37,14 @@ const CallToActionStyles = StyleSheet.create({
     padding: 20,
     gap: 15,
     borderRadius: 10,
-    backgroundColor: MAIN_COLORS.tertiary,
+    backgroundColor: MAIN_COLORS.quartery,
+    alignItems: 'center',
   },
   textContainer: {
-    color: "white",
+    color: MAIN_COLORS.tertiary,
   },
   iconContainer: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 });
 

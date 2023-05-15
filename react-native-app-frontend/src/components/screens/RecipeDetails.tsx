@@ -1,41 +1,36 @@
-import React, { useEffect, useState } from "react";
-import RecipeDetailsTemplate from "@templates/RecipeDetailsTemplate";
+import React from 'react';
+import RecipeDetailsTemplate from '@templates/RecipeDetailsTemplate';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { RootStackParamList } from '@interfaces/index';
+import { useQuery } from '@apollo/client';
+import { GET_ONE_RECIPE } from '@api/queries';
+import { Text, View } from 'react-native';
 
-const RecipeDetails = ({ route, navigation }: any) => {
-  const {recipeId} = route.params;
-  const [item, setItem] = useState({});
+const RecipeDetails = () => {
+  const route = useRoute<RouteProp<RootStackParamList, 'RecipeDetails'>>();
+  const { recipeId } = route.params;
+  console.log({ recipeId });
+  const {
+    loading: loadingRecipe,
+    error: errorRecipe,
+    data: dataRecipe,
+  } = useQuery(GET_ONE_RECIPE, { variables: { idRecipe: recipeId } });
 
-  useEffect( () => {
-    switch(recipeId){
-      case 1:
-        setItem({
-          name: "Hamburguesa",
-          description: "Hamburguesa Angus cubierta con queso mozzarella y cheddar, con jalapeños y tiritas de cebolla crujiente, bañadas con aderezo ranch. Servida en pan Kaiser tostado con lechuga y tomates.",
-          time: "20 Min",
-          image: require("../../assets/Hamburguesa.png")
-        })
-        break;
-      case 2:
-        setItem({
-          name: "Healthy Taco Salad",
-          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit Dignissimos veritatis totam voluptates dolorem enim eveniet iusto illo rerum fuga.",
-          time: "15 Min",
-          image: ""
-        })
-        break;
-      default:
-        setItem({
-          name: "Comida",
-          description: "",
-          time: "15 Min",
-          image: ""
-        })
-        break
-    }
-  }, [recipeId]);
-
-  return <RecipeDetailsTemplate 
-    item={item} />;
+  if (loadingRecipe) {
+    return (
+      <View>
+        <Text>Loading....</Text>
+      </View>
+    );
+  }
+  if (errorRecipe) {
+    return (
+      <View>
+        <Text>{JSON.stringify(errorRecipe)}</Text>
+      </View>
+    );
+  }
+  return <RecipeDetailsTemplate dataRecipe={dataRecipe.findRecipe} />;
 };
 
 export default RecipeDetails;

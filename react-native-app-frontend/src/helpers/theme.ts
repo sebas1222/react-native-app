@@ -1,27 +1,29 @@
-import { TextStyle, ViewStyle } from "react-native";
+import { ButtonStylesTypes, ContainerStylesTypes, TypographyStylesTypes } from '@interfaces/index';
+import { Platform, StatusBar } from 'react-native';
 
 export const MAIN_COLORS = {
-  primary: "#FF8400",
-  secondary: "#252525",
-  tertiary: "#000000",
-  quartery: "#FFFFFF",
-  danger: "#f24e1e",
+  primary: '#58D68D',
+  secondary: '#252525',
+  tertiary: '#242526',
+  quartery: '#FFFFFF',
+  danger: '#f24e1e',
 };
 
-export const CONTAINER_STYLES: { [key: string]: ViewStyle } = {
+export const CONTAINER_STYLES: ContainerStylesTypes = {
   mainContainer: {
     flex: 1, // con flex 1 indicar que el mainContainer ocupara todo el ancho y alto posible
+    paddingTop:
+      Platform.OS === 'android' ? StatusBar?.currentHeight && StatusBar.currentHeight : 15,
+    paddingBottom: 15,
     paddingHorizontal: 15,
-    paddingVertical: 20,
   },
 };
 
-export const BUTTON_STYLES: {
-  [key: string]: { containerStyle: ViewStyle; textStyle: TextStyle };
-} = {
+export const BUTTON_STYLES: ButtonStylesTypes = {
   primaryButton: {
     containerStyle: {
       backgroundColor: MAIN_COLORS.primary,
+      borderColor: MAIN_COLORS.primary,
     },
     textStyle: {
       color: MAIN_COLORS.quartery,
@@ -62,25 +64,25 @@ export const BUTTON_STYLES: {
   },
 };
 
-export const TYPOGRAPHY_STYLES: { [key: string]: TextStyle } = {
+export const TYPOGRAPHY_STYLES: TypographyStylesTypes = {
   superTitle: {
     fontSize: 60,
-    fontWeight: "900",
+    fontWeight: '900',
   },
   megaTitle: {
     fontSize: 40,
-    fontWeight: "900",
+    fontWeight: '900',
   },
   title: {
     fontSize: 26,
-    fontWeight: "900",
+    fontWeight: '900',
   },
   subtitle: {
     fontSize: 20,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   paragraph: {
-    fontWeight: "normal",
+    fontWeight: 'normal',
     lineHeight: 20,
   },
 };

@@ -1,5 +1,5 @@
-import LoginTemplate from "@templates/LoginTemplate";
-import React from "react";
+import LoginTemplate from '@templates/LoginTemplate';
+import React from 'react';
 
 const Login = () => {
   return <LoginTemplate />;

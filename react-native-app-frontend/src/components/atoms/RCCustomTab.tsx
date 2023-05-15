@@ -1,25 +1,15 @@
-import {
-  StyleSheet,
-  View,
-  TouchableNativeFeedback,
-  AccessibilityState,
-} from "react-native";
-import React from "react";
-import { BottomTabBarButtonProps } from "@react-navigation/bottom-tabs";
-import { MAIN_COLORS } from "@helpers/theme";
+import { StyleSheet, View, TouchableNativeFeedback, AccessibilityState } from 'react-native';
+import React from 'react';
+import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs';
+import { MAIN_COLORS } from '@helpers/theme';
 
 interface RCCustomTabProps extends BottomTabBarButtonProps {
   icon?: React.ReactNode;
   accessibilityState: AccessibilityState | undefined;
 }
 
-const RCCustomTab = ({
-  icon,
-  accessibilityState,
-  ...props
-}: RCCustomTabProps) => {
+const RCCustomTab = ({ icon, accessibilityState, ...props }: RCCustomTabProps) => {
   const { onPress } = props;
-  console.log(accessibilityState?.selected);
 
   return (
     <TouchableNativeFeedback onPress={onPress}>
@@ -37,7 +27,7 @@ const RCCustomTab = ({
 
 const RCCustomTabStyles = StyleSheet.create({
   container: {
-    justifyContent: "center",
+    justifyContent: 'center',
     paddingHorizontal: 20,
   },
   tabSelected: {

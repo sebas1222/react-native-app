@@ -1,193 +1,24 @@
-import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import { Formik } from "formik";
-import { useNavigation } from "@react-navigation/native";
-import { NavigationProps, RegisterFormTypes } from "@interfaces/index";
-import {
-  CONTAINER_STYLES,
-  MAIN_COLORS,
-  TYPOGRAPHY_STYLES,
-} from "@helpers/theme";
-import { registerFormSchema } from "@yupSchemas/registerFormSchema";
-import RCFormikTextInput from "@atoms/RCFormikTextInput";
-import RCButton from "@atoms/RCButton";
-import { useMutation } from "@apollo/client";
-import { REGISTER_USER } from "@api/queries";
-
-const initialValuesRegisterForm: RegisterFormTypes = {
-  name: "",
-  email: "",
-  password: "",
-  re_password: "",
-};
+import { CONTAINER_STYLES } from '@helpers/theme';
+import RegisterForm from '@organisms/RegisterForm';
+import React from 'react';
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 
 const RegisterTemplate = () => {
-  const navigation = useNavigation<NavigationProps["Login"]>();
-  const [RegisterUser, { data, loading, error }] = useMutation(REGISTER_USER);
-
-  const handleSubmit = async (values: RegisterFormTypes) => {
-    console.log(values);
-    try {
-      await RegisterUser({
-        variables: {
-          credentials: {
-            name: values.name,
-            email: values.email,
-            password: values.password,
-          },
-        },
-      });
-      navigation.navigate("Login");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  console.log(data);
   return (
-    <ScrollView>
-      <View
-        style={[
-          CONTAINER_STYLES.mainContainer,
-          RegisterTemplateStyles.container,
-        ]}
+    <SafeAreaView style={[CONTAINER_STYLES.mainContainer, RegisterTemplateStyles.mainContainer]}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
       >
-        <View style={RegisterTemplateStyles.titleContainer}>
-          <Text
-            style={[
-              TYPOGRAPHY_STYLES.superTitle,
-              {
-                color: MAIN_COLORS.primary,
-              },
-            ]}
-          >
-            Registrate
-          </Text>
-
-          <View style={RegisterTemplateStyles.circle}></View>
-        </View>
-        <Text style={RegisterTemplateStyles.errorMessage}>
-          {error && error.graphQLErrors[0].extensions.error}
-        </Text>
-        <Formik
-          onSubmit={handleSubmit}
-          validationSchema={registerFormSchema}
-          initialValues={initialValuesRegisterForm}
-        >
-          {({ handleSubmit }) => {
-            return (
-              <View style={[RegisterTemplateStyles.formContainer]}>
-                <RCFormikTextInput placeholder="Nombre" name="name" />
-                <RCFormikTextInput placeholder="Email" name="email" />
-                <RCFormikTextInput
-                  placeholder="Contraseña"
-                  name="password"
-                  secureTextEntry
-                />
-                <RCFormikTextInput
-                  placeholder="Confirmar contraseña"
-                  name="re_password"
-                  secureTextEntry
-                />
-                <RCButton
-                  text="Registrarme"
-                  loading={loading}
-                  styles={{
-                    buttonStyles: {
-                      paddingVertical: 15,
-                    },
-                  }}
-                  type="tertiaryButton"
-                  onPress={() => handleSubmit()}
-                />
-              </View>
-            );
-          }}
-        </Formik>
-        <View style={RegisterTemplateStyles.separationContainer}>
-          <Text style={RegisterTemplateStyles.separatorText}>
-            o registrate con
-          </Text>
-          <View style={RegisterTemplateStyles.separator}></View>
-        </View>
-        <View style={RegisterTemplateStyles.authsContainer}>
-          <RCButton
-            text="Iniciar sesión con Google"
-            icon={
-              <Image
-                alt="google_logo"
-                style={RegisterTemplateStyles.authIconImage}
-                source={require("../../assets/logos/google.png")}
-              />
-            }
-            styles={{
-              buttonStyles: {
-                backgroundColor: "white",
-                padding: 10,
-                flexDirection: "row-reverse",
-              },
-              textStyles: { color: "grey" },
-            }}
-            onPress={() => navigation.navigate("Register")}
-          />
-        </View>
-      </View>
-    </ScrollView>
+        <RegisterForm />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const RegisterTemplateStyles = StyleSheet.create({
-  container: {
+  mainContainer: {
     gap: 15,
-  },
-  titleContainer: {
-    flexDirection: "row",
-    gap: 2,
-    alignItems: "flex-end",
-  },
-  formContainer: {
-    gap: 10,
-  },
-  errorMessage: {
-    color: MAIN_COLORS.danger,
-    textAlign: "center",
-  },
-  separationContainer: {
-    position: "relative",
-  },
-  separatorText: {
-    textAlign: "center",
-    backgroundColor: "#f3f3f3",
-    alignSelf: "center",
-    color: "grey",
-    fontSize: 12,
-    marginBottom: 2,
-    paddingHorizontal: 4,
-    zIndex: 1,
-  },
-  circle: {
-    width: 15,
-    marginBottom: 20,
-    height: 15,
-    backgroundColor: MAIN_COLORS.primary,
-    borderRadius: 999,
-  },
-  separator: {
-    height: 1.5,
-    width: "100%",
-    top: "50%",
-    flex: 1,
-    backgroundColor: "grey",
-    opacity: 0.3,
-    position: "absolute",
-  },
-  authsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 10,
-  },
-  authIconImage: {
-    width: 40,
-    aspectRatio: 1,
   },
 });
 

@@ -1,13 +1,5 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextStyle,
-  StyleSheet,
-  ViewStyle,
-} from "react-native";
-import React from "react";
-import { MAIN_COLORS } from "@helpers/theme";
+import { View, Text, TouchableOpacity, TextStyle, StyleSheet, ViewStyle } from 'react-native';
+import React from 'react';
 
 interface RCTextLinkProps {
   text: string;
@@ -16,12 +8,7 @@ interface RCTextLinkProps {
   styles?: { linkStyles?: ViewStyle; textStyles?: TextStyle };
 }
 
-const RCTextLink = ({
-  text = "TextLink",
-  onPress,
-  styles,
-  icon,
-}: RCTextLinkProps) => {
+const RCTextLink = ({ text = 'TextLink', onPress, styles, icon }: RCTextLinkProps) => {
   return (
     <TouchableOpacity activeOpacity={0.4} onPress={() => onPress && onPress()}>
       <View style={[RCTextLinkStyles.container, styles?.linkStyles]}>
@@ -33,13 +20,12 @@ const RCTextLink = ({
 };
 const RCTextLinkStyles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 2,
   },
   text: {
     fontSize: 14,
-    fontWeight: "bold",
-    color: MAIN_COLORS.primary,
+    fontWeight: 'bold',
   },
 });
 

@@ -1,5 +1,5 @@
-import RegisterTemplate from "@templates/RegisterTemplate";
-import React from "react";
+import RegisterTemplate from '@templates/RegisterTemplate';
+import React from 'react';
 
 const Register = () => {
   return <RegisterTemplate />;

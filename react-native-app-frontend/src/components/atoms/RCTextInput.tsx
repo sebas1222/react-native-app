@@ -1,12 +1,6 @@
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  ViewStyle,
-  TextInputProps,
-} from "react-native";
-import React, { useState } from "react";
-import { Entypo } from "@expo/vector-icons";
+import { View, TextInput, StyleSheet, ViewStyle, TextInputProps } from 'react-native';
+import React, { useState } from 'react';
+import { Entypo } from '@expo/vector-icons';
 
 export interface RCTextInputProps extends TextInputProps {
   styles?: ViewStyle;
@@ -15,16 +9,8 @@ export interface RCTextInputProps extends TextInputProps {
   onChangeText: (value: string) => void | undefined;
 }
 
-const RCTextInput = ({
-  styles,
-  value,
-  onChangeText,
-  icon,
-  ...props
-}: RCTextInputProps) => {
-  const [hidePassword, setHidePassword] = useState<boolean>(
-    props.secureTextEntry || false
-  );
+const RCTextInput = ({ styles, value, onChangeText, icon, ...props }: RCTextInputProps) => {
+  const [hidePassword, setHidePassword] = useState<boolean>(props.secureTextEntry || false);
   const handleChange = (value: string) => {
     //revisar
     onChangeText(value);
@@ -40,10 +26,10 @@ const RCTextInput = ({
       ></TextInput>
       {props.secureTextEntry && value && value.length > 0 && (
         <Entypo
-          name={hidePassword ? "eye" : "eye-with-line"}
+          name={hidePassword ? 'eye' : 'eye-with-line'}
           size={24}
           onPress={() => setHidePassword(!hidePassword)}
-          color={styles?.borderColor || "grey"}
+          color={styles?.borderColor || 'grey'}
         />
       )}
       {icon && <View>{icon}</View>}
@@ -53,11 +39,10 @@ const RCTextInput = ({
 
 const RCTextInputStyles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    alignItems: "center",
-
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: 10,
-    borderColor: "grey",
+    borderColor: 'grey',
     paddingHorizontal: 5,
     borderWidth: 2,
     borderRadius: 5,
