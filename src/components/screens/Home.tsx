@@ -1,5 +1,6 @@
 import { GET_ALL_CATEGORIES, GET_ALL_RECIPES } from '@api/queries';
 import { useQuery } from '@apollo/client';
+import RCLoadingIndicator from '@atoms/RCLoadingIndicator';
 import { useFocusEffect } from '@react-navigation/native';
 import HomeTemplate from '@templates/HomeTemplate';
 import React from 'react';
@@ -25,11 +26,7 @@ const Home = () => {
   );
 
   if (loadingRecipes || loadingCategories) {
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    );
+    return <RCLoadingIndicator />;
   }
   if (errorRecipes || errorCategories) {
     return (

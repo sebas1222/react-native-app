@@ -1,5 +1,5 @@
 import { View, Image, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import RCButton from '@atoms/RCButton';
 import { MAIN_COLORS } from '@helpers/theme';
 import { NavigationProps, UserTypes } from '@interfaces/index';
@@ -16,10 +16,11 @@ interface UserCardProps {
 const UserCard = ({ dataUser }: UserCardProps) => {
   const navigation = useNavigation<NavigationProps['UserPerfil']>();
   const currentUser = useGetCurrentUser();
-  const { mutationFn: unFollowUser, loading: loadingFollow } = useMutationAction(UNFOLLOW_USER, {
+  const [isMutating, setIsMutating] = useState(false);
+  const { mutationFn: unFollowUser } = useMutationAction(UNFOLLOW_USER, {
     refetchQueries: [GET_ONE_USER, 'GetOneUser'],
   });
-  const { mutationFn: followUser, loading: loadingUnfollow } = useMutationAction(FOLLOW_USER, {
+  const { mutationFn: followUser } = useMutationAction(FOLLOW_USER, {
     refetchQueries: [GET_ONE_USER, 'GetOneUser'],
   });
 
@@ -30,7 +31,15 @@ const UserCard = ({ dataUser }: UserCardProps) => {
     ? true
     : false;
 
+  // cada vez que se realize la accion de seguir o no seguir se hara un refetch por ende la dataUser pasada por props cambiara
+  // y cuando ya se ha hecho el refetch y se ha pasado la nueva data recien seteamos el loading en false, de esta forma
+  //aseguramos que el redenrizado condicional se haga adecuadamente
+  useEffect(() => {
+    setIsMutating(false);
+  }, [dataUser]);
+
   const handleUnfollow = async () => {
+    setIsMutating(true);
     try {
       await unFollowUser({
         variables: {
@@ -42,6 +51,7 @@ const UserCard = ({ dataUser }: UserCardProps) => {
     }
   };
   const handleFollow = async () => {
+    setIsMutating(true);
     try {
       await followUser({
         variables: {
@@ -72,14 +82,17 @@ const UserCard = ({ dataUser }: UserCardProps) => {
       {!(dataUser.id === currentUser._id) ? (
         alreadyFollowing ? (
           <RCButton
-            loading={loadingUnfollow}
+            loading={isMutating}
+            styles={{ buttonStyles: { width: 110 } }}
+            loadingIndicatorColor={MAIN_COLORS.primary}
             onPress={() => handleUnfollow()}
             text="Siguiendo"
             type="primaryButtonInner"
           />
         ) : (
           <RCButton
-            loading={loadingFollow}
+            loading={isMutating}
+            styles={{ buttonStyles: { width: 110 } }}
             onPress={() => handleFollow()}
             text="Seguir"
             type="primaryButton"

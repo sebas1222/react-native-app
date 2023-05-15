@@ -5,7 +5,7 @@ import { Text, View } from 'react-native';
 import UserPerfilTemplate from '@templates/UserPerfilTemplate';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '@interfaces/index';
-import { ActivityIndicator } from 'react-native';
+import RCLoadingIndicator from '@atoms/RCLoadingIndicator';
 
 const UserPerfil = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'UserPerfil'>>();
@@ -29,11 +29,7 @@ const UserPerfil = () => {
   }, [userId]);
 
   if (loadingRecipes || loadingUserInfo) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <ActivityIndicator />
-      </View>
-    );
+    return <RCLoadingIndicator />;
   }
   if (errorRecipes || errorUserInfo) {
     return (

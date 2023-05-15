@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MAIN_COLORS } from '@helpers/theme';
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { UserTypes } from '@interfaces/index';
@@ -15,15 +15,17 @@ interface UserPerfilPresentationProps {
 }
 
 const UserPerfilPresentation = ({ dataUser, editable }: UserPerfilPresentationProps) => {
-  const { mutationFn: unFollowUser, loading: loadingFollow } = useMutationAction(UNFOLLOW_USER, {
+  const { mutationFn: unFollowUser } = useMutationAction(UNFOLLOW_USER, {
     refetchQueries: [GET_ONE_USER, 'GetOneUser'],
   });
-  const { mutationFn: followUser, loading: loadingUnfollow } = useMutationAction(FOLLOW_USER, {
+  const { mutationFn: followUser } = useMutationAction(FOLLOW_USER, {
     refetchQueries: [GET_ONE_USER, 'GetOneUser'],
   });
+  const [isMutating, setIsMutating] = useState(false);
   const currentUser = useGetCurrentUser();
 
   const handleFollowUser = async () => {
+    setIsMutating(true);
     try {
       await followUser({ variables: { idUser: dataUser.id } });
     } catch (error) {
@@ -31,12 +33,17 @@ const UserPerfilPresentation = ({ dataUser, editable }: UserPerfilPresentationPr
     }
   };
   const handleUnfollowUser = async () => {
+    setIsMutating(true);
     try {
       await unFollowUser({ variables: { idUser: dataUser.id } });
     } catch (error) {
       console.log(error);
     }
   };
+  useEffect(() => {
+    setIsMutating(false);
+  }, [dataUser]);
+
   const alreadyFollowing = dataUser.followers.find((user) => user.id === currentUser._id)
     ? true
     : false;
@@ -48,14 +55,17 @@ const UserPerfilPresentation = ({ dataUser, editable }: UserPerfilPresentationPr
           (alreadyFollowing ? (
             <RCButton
               type="primaryButtonInner"
-              styles={{ buttonStyles: { padding: 5 } }}
+              loading={isMutating}
+              loadingIndicatorColor={MAIN_COLORS.primary}
+              styles={{ buttonStyles: { padding: 5, width: 50 } }}
               icon={<AntDesign name="deleteuser" size={20} color={MAIN_COLORS.primary} />}
               onPress={() => handleUnfollowUser()}
             />
           ) : (
             <RCButton
               type="primaryButton"
-              styles={{ buttonStyles: { padding: 5 } }}
+              loading={isMutating}
+              styles={{ buttonStyles: { padding: 5, width: 50 } }}
               icon={<AntDesign name="adduser" size={20} color={MAIN_COLORS.quartery} />}
               onPress={() => handleFollowUser()}
             />

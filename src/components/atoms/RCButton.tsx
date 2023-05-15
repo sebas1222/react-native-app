@@ -5,6 +5,7 @@ import {
   ViewStyle,
   TextStyle,
   TouchableNativeFeedback,
+  ColorValue,
 } from 'react-native';
 import React from 'react';
 import { BUTTON_STYLES, MAIN_COLORS } from '@helpers/theme';
@@ -18,6 +19,7 @@ interface RCButtonProps {
   icon?: React.ReactNode;
   disabled?: boolean;
   loading?: boolean;
+  loadingIndicatorColor?: ColorValue;
   styles?: { buttonStyles?: ViewStyle; textStyles?: TextStyle };
 }
 
@@ -25,6 +27,7 @@ const RCButton = ({
   text = '', //valores por defecto
   type,
   onPress,
+  loadingIndicatorColor = MAIN_COLORS.quartery,
   disabled,
   icon,
   loading,
@@ -63,7 +66,7 @@ const RCButton = ({
           )}
 
           {icon && icon}
-          {loading && <ActivityIndicator color={MAIN_COLORS.quartery} />}
+          {loading && <ActivityIndicator color={loadingIndicatorColor} />}
         </View>
       </TouchableNativeFeedback>
     </View>
