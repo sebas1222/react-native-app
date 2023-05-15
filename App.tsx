@@ -11,10 +11,18 @@ const client = new ApolloClient({
   uri: 'https://graphql-server-icook-production.up.railway.app/',
   cache: new InMemoryCache({
     typePolicies: {
-      Query: {
+      User: {
+        keyFields: ['id'],
         fields: {
-          GetOneUser: {
-            merge: true,
+          following: {
+            merge(existing, incoming) {
+              return incoming;
+            },
+          },
+          followers: {
+            merge(existing, incoming) {
+              return incoming;
+            },
           },
         },
       },
