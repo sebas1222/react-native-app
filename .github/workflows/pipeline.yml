@@ -33,10 +33,10 @@ jobs:
         run: |
           apk_link=$(grep -o -m 1 "https://.*\.apk" log.txt)
           echo "APK Link: $apk_link"
-          echo "::save_state name=apk_link::$apk_link"
+          echo "apk_link=$apk_link" >> $GITHUB_ENV
       - name: Download APK
         run: |
-          apk_link="${{ env.APK_LINK }}"
+          apk_link="${{ env.apk_link }}"
           curl -LJO "$apk_link"
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v2
