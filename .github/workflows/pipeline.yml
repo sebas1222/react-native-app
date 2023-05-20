@@ -28,7 +28,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build on EAS
-        run: eas build -p android --profile preview --non-interactive
+        run: eas build -p android --profile preview --non-interactive | tee log.txt
+      - name: Extract APK Link
+        run: |
+          apk_link=$(grep -o -m 1 "https://.*\.apk" log.txt)
+          echo "APK Link: $apk_link"
+          echo "::set-output name=apk_link::$apk_link"
+      - name: Download APK
+        run: |
+          apk_link=${{ steps.extract_apk_link.outputs.apk_link }}
+          curl -LJO $apk_link
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ICook APK
+          path: ./*.apk
 
       #- name: instal eas
       #  run: npm install -global eas-cli
