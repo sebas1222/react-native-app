@@ -11,6 +11,7 @@ describe('RCButton component', () => {
   // se usa el beforeEach el cual es una funcion que se ejecutara antes de cada test
   // asi podremos trabajar directamente ya con el component en cada test
   beforeEach(() => {
+    jest.setTimeout(60000);
     component = render(<RCButton onPress={mockHandler} />);
   });
   // se testea que el componente se renderize

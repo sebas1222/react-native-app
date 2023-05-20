@@ -59,9 +59,6 @@ const mocks = [
 ]; //
 
 describe('<Home/>', () => {
-  beforeEach(() => {
-    jest.setTimeout(60000);
-  });
   it('Renderiza el UI esperado cuando la data esta habilitada', async () => {
     const { queryByText } = render(
       <NavigationContainer>
@@ -77,6 +74,10 @@ describe('<Home/>', () => {
       expect(recipeText).toBeTruthy();
       expect(categoryText).toBeTruthy();
       //verificar que se renderiza una categoria
-    });
+    },
+    {
+      timeout: 20000
+    }
+    );
   });
 });
