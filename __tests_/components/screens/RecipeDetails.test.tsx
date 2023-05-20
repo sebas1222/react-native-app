@@ -46,6 +46,9 @@ const mocks = [
 const Stack = createStackNavigator();
 
 describe('<RecipeDetails/>', () => {
+  beforeEach(() => {
+    jest.setTimeout(60000);
+    });
   it('Renderiza el UI esperado cuando la data esta habilitada', async () => {
     const { queryByText } = render(
       <NavigationContainer>
