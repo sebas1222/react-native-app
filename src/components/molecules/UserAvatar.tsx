@@ -157,6 +157,7 @@ const UserAvatarStyles = StyleSheet.create({
   avatarImage: {
     width: 90,
     height: 90,
+    backgroundColor: MAIN_COLORS.tertiary,
     borderRadius: 999,
     resizeMode: 'cover',
   },

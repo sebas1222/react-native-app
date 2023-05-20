@@ -13,9 +13,17 @@
       },
       "android": {
         "buildType": "apk"
+      },
+      "env":{
+        "CLOUDINARY_CLOUD_NAME" : "dco8fbxso",
+        "CLOUDINARY_API_KEY" :"532913952713138",
+        "CLOUDINARY_API_SECRET" : "WF3WkMLheBOLDsSNpiBvVxNukcA",
+        "CLOUDINARY_UPLOAD_PRESET" : "ml_default",
+        "JWT_ICOOK_SECRET": "JWT_ICOOK_SECRET_TALLER_MOVIL"
       }
     },
-    "production": {}
+    "production": {
+    }
   },
   "submit": {
     "production": {}

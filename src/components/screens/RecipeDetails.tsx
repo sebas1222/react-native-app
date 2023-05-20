@@ -5,6 +5,7 @@ import { RootStackParamList } from '@interfaces/index';
 import { useQuery } from '@apollo/client';
 import { GET_ONE_RECIPE } from '@api/queries';
 import { Text, View } from 'react-native';
+import RCLoadingIndicator from '@atoms/RCLoadingIndicator';
 
 const RecipeDetails = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'RecipeDetails'>>();
@@ -17,11 +18,7 @@ const RecipeDetails = () => {
   } = useQuery(GET_ONE_RECIPE, { variables: { idRecipe: recipeId } });
 
   if (loadingRecipe) {
-    return (
-      <View>
-        <Text>Loading....</Text>
-      </View>
-    );
+    return <RCLoadingIndicator />;
   }
   if (errorRecipe) {
     return (

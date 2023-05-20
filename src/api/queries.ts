@@ -100,6 +100,7 @@ export const REGISTER_USER = gql`
 export const UPDATE_USER_AVATAR = gql`
   mutation UpdateUserAvatar($avatarUri: String!) {
     updateAvatar(avatarUri: $avatarUri) {
+      id
       avatar
     }
   }
