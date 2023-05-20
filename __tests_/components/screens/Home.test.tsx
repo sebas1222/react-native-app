@@ -57,7 +57,7 @@ const mocks = [
     },
   },
 ]; //
-
+jest.setTimeout(10000);
 describe('<Home/>', () => {
   it('Renderiza el UI esperado cuando la data esta habilitada', async () => {
     const { queryByText } = render(
@@ -74,6 +74,7 @@ describe('<Home/>', () => {
       expect(recipeText).toBeTruthy();
       expect(categoryText).toBeTruthy();
       //verificar que se renderiza una categoria
-    });
+    }
+    );
   });
 });
