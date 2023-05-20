@@ -69,9 +69,7 @@ const UserCard = ({ dataUser }: UserCardProps) => {
       <View style={UserCardStyles.primaryInfoContainer}>
         <Image
           style={UserCardStyles.avatarContainer}
-          source={
-            dataUser?.avatar ? { uri: dataUser?.avatar } : require('../../assets/userprofile.png')
-          }
+          source={dataUser?.avatar ? { uri: dataUser?.avatar } : require('../../assets/recipe.jpg')}
         />
 
         <RCTextLink

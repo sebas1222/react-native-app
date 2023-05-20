@@ -73,7 +73,7 @@ const UserAvatar = ({ editable, avatarUri }: UserAvatarProps) => {
       <Pressable onPress={() => setModalPhoto(true)}>
         <Image
           style={UserAvatarStyles.avatarImage}
-          source={avatarUri ? { uri: avatarUri } : require('../../assets/userprofile.png')}
+          source={avatarUri ? { uri: avatarUri } : require('../../assets/recipe.jpg')}
         />
       </Pressable>
       <Modal animationType="slide" transparent={true} visible={modalPhoto}>
@@ -86,7 +86,7 @@ const UserAvatar = ({ editable, avatarUri }: UserAvatarProps) => {
           </View>
           <Image
             style={UserAvatarStyles.imagePerfilContainer}
-            source={avatarUri ? { uri: avatarUri } : require('../../assets/userprofile.png')}
+            source={avatarUri ? { uri: avatarUri } : require('../../assets/recipe.jpg')}
           ></Image>
         </View>
       </Modal>
@@ -107,7 +107,7 @@ const UserAvatar = ({ editable, avatarUri }: UserAvatarProps) => {
               source={
                 selectedPhoto[0]?.uri
                   ? { uri: selectedPhoto[0]?.uri }
-                  : require('../../assets/userprofile.png')
+                  : require('../../assets/recipe.jpg')
               }
             ></Image>
             <View style={UserAvatarStyles.imageSelectedContainer}>

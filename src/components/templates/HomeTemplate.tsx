@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { SafeAreaView, StyleSheet, ScrollView, Text, View } from 'react-native';
 import CallToActionCard from '@molecules/CallToActionCard';
-import HorizontalCard from '@molecules/HorizontalCard';
 import { CategoryTypes, NavigationProps, RecipeTypes } from '@interfaces/index';
 import CategoriesList from '@organisms/CategoriesList';
 import { CONTAINER_STYLES, MAIN_COLORS, TYPOGRAPHY_STYLES } from '@helpers/theme';
@@ -42,7 +41,6 @@ const HomeTemplate = ({ allRecipes, allCategories }: HomeTemplateProps) => {
           <Text style={TYPOGRAPHY_STYLES.subtitle}>Popular</Text>
           <RecipeList orientation="horizontal" dataRecipes={allRecipes} />
         </View>
-        <HorizontalCard dataRecipe={allRecipes[0]} />
       </ScrollView>
     </SafeAreaView>
   );

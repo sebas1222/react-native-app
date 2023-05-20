@@ -1,7 +1,8 @@
-import RCButton from "@atoms/RCButton";
-import { RenderAPI, fireEvent, render } from "@testing-library/react-native";
+import RCButton from '@atoms/RCButton';
+import React from 'react';
+import { RenderAPI, fireEvent, render } from '@testing-library/react-native';
 
-describe("RCButton component", () => {
+describe('RCButton component', () => {
   // inicializamos el component con su tipado
   let component: RenderAPI;
   //se crea un mockHandler que nos permitira testear el evento onPress con esta función
@@ -13,12 +14,12 @@ describe("RCButton component", () => {
     component = render(<RCButton onPress={mockHandler} />);
   });
   // se testea que el componente se renderize
-  it("Se renderiza el RCButton", () => {
+  it('Se renderiza el RCButton', () => {
     expect(component).toBeDefined();
   });
   // se testea la prop onPress del componente con el mockHandler
-  it("Ejecuta la acción onPress", () => {
-    fireEvent.press(component.getByTestId("RCButton_touchable"));
+  it('Ejecuta la acción onPress', () => {
+    fireEvent.press(component.getByTestId('RCButton_touchable'));
     expect(mockHandler).toHaveBeenCalledTimes(1);
   });
 });

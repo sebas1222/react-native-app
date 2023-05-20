@@ -1,12 +1,12 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
-import React from "react";
-import RecipeCard from "@molecules/RecipeCard";
-import { TYPOGRAPHY_STYLES } from "@helpers/theme";
-import { Recipe } from "@interfaces/index";
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import React from 'react';
+import RecipeCard from '@molecules/RecipeCard';
+import { TYPOGRAPHY_STYLES } from '@helpers/theme';
+import { RecipeTypes } from '@interfaces/index';
 
 interface RecipeCardListProps {
   titleList: string;
-  recipesData: Recipe[]; //cambiar al tipo de dato del recipeItem de la Api
+  recipesData: RecipeTypes[]; //cambiar al tipo de dato del recipeItem de la Api
 }
 
 const RecipeCardList = ({ titleList, recipesData }: RecipeCardListProps) => {

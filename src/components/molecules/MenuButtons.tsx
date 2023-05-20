@@ -1,5 +1,5 @@
 import { View, StyleSheet, FlatList, Dimensions } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import RCButton from '@atoms/RCButton';
 import { MAIN_COLORS } from '@helpers/theme';
 import { SelectDataTypes } from '@interfaces/index';

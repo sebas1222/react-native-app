@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "react-native-app",
-    "slug": "react-native-app",
+    "name": "icook-native",
+    "slug": "icook-native",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -40,7 +40,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "432ddc2b-2537-4656-8098-7a3c260ddef5"
+        "projectId": "f8c19316-71b4-4fb5-8e06-53a4f685d21f"
       }
     }
   }
