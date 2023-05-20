@@ -1,6 +1,7 @@
 import { GET_ALL_CATEGORIES, GET_ALL_RECIPES } from '@api/queries';
 import { useQuery } from '@apollo/client';
 import RCLoadingIndicator from '@atoms/RCLoadingIndicator';
+import Layout from '@molecules/Layout';
 import { useFocusEffect } from '@react-navigation/native';
 import HomeTemplate from '@templates/HomeTemplate';
 import React from 'react';
@@ -37,10 +38,13 @@ const Home = () => {
   }
 
   return (
-    <HomeTemplate
-      allRecipes={dataRecipes.allRecipes}
-      allCategories={dataCategories.allCategories}
-    />
+    <View style={{flex: 1}}>
+      <Layout/>
+      <HomeTemplate
+        allRecipes={dataRecipes.allRecipes}
+        allCategories={dataCategories.allCategories}
+      />
+    </View>
   );
 };
 
