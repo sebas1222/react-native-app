@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "icook-native",
-    "slug": "icook-native",
+    "name": "icook-react",
+    "slug": "icook-react",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -40,7 +40,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "f8c19316-71b4-4fb5-8e06-53a4f685d21f"
+        "projectId": "41c17792-1c55-410b-bb18-1dbabb62f328"
       }
     }
   }
