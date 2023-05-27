@@ -29,6 +29,9 @@ const Home = () => {
   if (loadingRecipes || loadingCategories) {
     return <RCLoadingIndicator />;
   }
+  console.log(dataRecipes)
+  console.log(errorRecipes)
+  console.log(errorCategories)
   if (errorRecipes || errorCategories) {
     return (
       <View>
