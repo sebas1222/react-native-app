@@ -1,11 +1,12 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react-native';
+import { render, screen, waitFor } from '@testing-library/react-native';
 import { MockedProvider } from '@apollo/client/testing';
 import Home from '@screens/Home';
 import { GET_ALL_CATEGORIES, GET_ALL_RECIPES } from '@api/queries';
 import { NavigationContainer } from '@react-navigation/native';
+import { GraphQLError } from 'graphql';
 
-const mocks = [
+const sucess_mocks = [
   {
     request: {
       query: GET_ALL_RECIPES,
@@ -56,13 +57,31 @@ const mocks = [
       },
     },
   },
-]; //
+]; 
+
+const error_mocks = [
+  {
+    request: {
+      query: GET_ALL_RECIPES,
+      variables: {},
+    },
+    error:  new Error("RecError") 
+  },
+  {
+    request: {
+      query: GET_ALL_CATEGORIES,
+      variables: {},
+    },
+    error: new Error("CatError") 
+  },
+]
+
 jest.setTimeout(10000);
 describe('<Home/>', () => {
   it('Renderiza el UI esperado cuando la data esta habilitada', async () => {
     const { queryByText } = render(
       <NavigationContainer>
-        <MockedProvider mocks={mocks}>
+        <MockedProvider mocks={sucess_mocks}>
           <Home />
         </MockedProvider>
       </NavigationContainer>
@@ -75,6 +94,23 @@ describe('<Home/>', () => {
       expect(categoryText).toBeTruthy();
       //verificar que se renderiza una categoria
     }
+                 );
+  });
+
+  it('Renderiza el UI esperado cuando la data NO esta habilitada', async () => {
+    const { queryByText } = render(
+      <NavigationContainer>
+        <MockedProvider mocks={error_mocks}>
+          <Home />
+        </MockedProvider>
+      </NavigationContainer>
     );
+    // expect(await screen.queryByText('RecError')).toBeTruthy();
+    await waitFor(() => {
+      err = queryByText('RecError');
+      console.log(err);
+      expect(queryByText('RecError', {exact: false})).toBeTruthy();
+      //verificar que se renderiza una receta
+    });
   });
 });
