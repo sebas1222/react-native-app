@@ -23,7 +23,6 @@ const UserPerfilTemplate = ({ dataUser, dataRecipes }: UserPerfilTemplateProps) 
 
   useEffect(() => {
     setCurrentSection(PROFILE_SECTIONS.Recipes);
-    console.log('xd');
   }, [dataUser.id]);
 
   return (

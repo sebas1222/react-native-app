@@ -1,13 +1,14 @@
-import { GET_ALL_CATEGORIES, GET_ALL_RECIPES } from '@api/queries';
+import { GET_ALL_CATEGORIES, GET_ALL_RECIPES, GET_ONE_USER } from '@api/queries';
 import { useQuery } from '@apollo/client';
 import RCLoadingIndicator from '@atoms/RCLoadingIndicator';
-import Layout from '@molecules/Layout';
+import useGetCurrentUser from '@hooks/useGetCurrentUser';
 import { useFocusEffect } from '@react-navigation/native';
 import HomeTemplate from '@templates/HomeTemplate';
 import React from 'react';
 import { Text, View } from 'react-native';
 
 const Home = () => {
+  const currentUser = useGetCurrentUser();
   const {
     loading: loadingRecipes,
     error: errorRecipes,
@@ -20,29 +21,39 @@ const Home = () => {
     data: dataCategories,
   } = useQuery(GET_ALL_CATEGORIES);
 
+  const {
+    loading: loadingUser,
+    error: errorUser,
+    data: dataUser,
+  } = useQuery(GET_ONE_USER, {
+    variables: {
+      idUser: currentUser?._id,
+    },
+  });
+
   useFocusEffect(
     React.useCallback(() => {
       refetch();
     }, [])
   );
 
-  if (loadingRecipes || loadingCategories) {
+  if (loadingRecipes || loadingCategories || loadingUser) {
     return <RCLoadingIndicator />;
   }
-  if (errorRecipes || errorCategories) {
+  if (errorRecipes || errorCategories || errorUser) {
     return (
       <View>
-        <Text>{JSON.stringify({ ...errorCategories, ...errorRecipes })}</Text>
+        <Text>{JSON.stringify({ ...errorCategories, ...errorRecipes, ...errorUser })}</Text>
       </View>
     );
   }
 
   return (
-    <View style={{flex: 1}}>
-      <Layout/>
+    <View style={{ flex: 1 }}>
       <HomeTemplate
         allRecipes={dataRecipes.allRecipes}
         allCategories={dataCategories.allCategories}
+        dataCurrentUser={dataUser.findUser}
       />
     </View>
   );
