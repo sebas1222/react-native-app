@@ -20,10 +20,11 @@ const RecipeDetails = () => {
   if (loadingRecipe) {
     return <RCLoadingIndicator />;
   }
+  console.log(errorRecipe?.graphQLErrors[0].message);
   if (errorRecipe) {
     return (
       <View>
-        <Text>{JSON.stringify(errorRecipe)}</Text>
+        <Text>{errorRecipe?.graphQLErrors[0].message}</Text>
       </View>
     );
   }

@@ -9,7 +9,8 @@ import { RootStackParamList } from '@interfaces/index';
 import AddRecipe from '@screens/AddRecipe';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
-export default function BottomTabNavigator() {
+
+const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -80,4 +81,6 @@ export default function BottomTabNavigator() {
       />
     </Tab.Navigator>
   );
-}
+};
+
+export default BottomTabNavigator;

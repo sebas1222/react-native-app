@@ -4,9 +4,9 @@ import React from 'react';
 import Login from '@screens/Login';
 import Register from '@screens/Register';
 import { RootStackParamList } from '@interfaces/index';
-import BottomTabNavigator from './BottomTabNavigator';
 import RecipeDetails from '@screens/RecipeDetails';
 import UserPerfil from '@screens/UserPerfil';
+import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator<RootStackParamList>();
 

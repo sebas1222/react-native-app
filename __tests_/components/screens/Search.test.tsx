@@ -1,14 +1,13 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react-native';
 import { MockedProvider } from '@apollo/client/testing';
-import Home from '@screens/Home';
-import { GET_ALL_CATEGORIES, GET_ALL_RECIPES, GET_ONE_USER } from '@api/queries';
-import { NavigationContainer } from '@react-navigation/native';
+import { GET_ALL_CATEGORIES, GET_ALL_RECIPES } from '@api/queries';
 import configureStore from 'redux-mock-store'; //ES6 modules
 import { GraphQLError } from 'graphql';
 import { Provider } from 'react-redux';
+import Search from '@screens/Search';
+import { NavigationContainer } from '@react-navigation/native';
 
-//Se hace los mocks para las pruebas exitosas
 const mocks = [
   {
     request: {
@@ -60,27 +59,8 @@ const mocks = [
       },
     },
   },
-  {
-    request: {
-      query: GET_ONE_USER,
-      variables: { idUser: 'UserTest1' },
-    },
-    result: {
-      data: {
-        findUser: {
-          id: 'UserTest1',
-          name: 'User Test1',
-          email: 'User Test1',
-          avatar: 'User Test1',
-          following: [],
-          followers: [],
-        },
-      },
-    },
-  },
 ]; //
 
-//Se hace el mock para las pruebas a fallar
 const mockErrors = [
   {
     request: {
@@ -101,15 +81,6 @@ const mockErrors = [
       errors: [new GraphQLError('Error al obtener las categorias!')],
     },
   },
-  {
-    request: {
-      query: GET_ONE_USER,
-      variables: { idUser: 'UserTest1' },
-    },
-    result: {
-      errors: [new GraphQLError('Error al obtener la data del usuario!')],
-    },
-  },
 ];
 jest.setTimeout(10000);
 
@@ -128,13 +99,13 @@ const initialState = {
 };
 const store = mockStore(initialState);
 
-describe('<Home/>', () => {
+describe('<Search/>', () => {
   it('Renderiza el UI esperado cuando la data esta habilitada', async () => {
     const { queryByText } = render(
       <NavigationContainer>
         <Provider store={store}>
           <MockedProvider mocks={mocks}>
-            <Home />
+            <Search />
           </MockedProvider>
         </Provider>
       </NavigationContainer>
@@ -142,10 +113,7 @@ describe('<Home/>', () => {
     await waitFor(() => {
       //verificar que se renderiza una receta
       const recipeText = queryByText('Receta Test');
-      const categoryText = queryByText('Category Test1');
       expect(recipeText).toBeTruthy();
-      expect(categoryText).toBeTruthy();
-      //verificar que se renderiza una categoria
     });
   });
   it('Se muestra el mensaje de error en la pantalla cuando ocurre un error', async () => {
@@ -153,13 +121,12 @@ describe('<Home/>', () => {
       <NavigationContainer>
         <Provider store={store}>
           <MockedProvider mocks={mockErrors}>
-            <Home />
+            <Search />
           </MockedProvider>
         </Provider>
       </NavigationContainer>
     );
     await waitFor(() => {
-      // verificar que se imprima el mensaje de error que traera el GraphQLError
       const errorText = queryByText('Error al obtener las recetas!');
       expect(errorText).toBeTruthy();
     });

@@ -13,6 +13,7 @@ import { LOGIN_USER } from '../../api/queries';
 import { useDispatch } from 'react-redux';
 import { setToken } from '../../redux/actions/authActions';
 import { useMutationAction } from '@hooks/useMutationAction';
+import { decryptJWT } from '@helpers/decrypt';
 
 const initialValuesLoginForm: LoginFormTypes = {
   email: '',
@@ -30,6 +31,8 @@ const LoginForm = () => {
       const result = await loginUser({ variables: { credentials: values } });
       const token = result.data.loginUser.authToken;
       dispatch(setToken(token));
+      const currentUser = decryptJWT(token);
+      console.log({ currentUser });
       navigation.navigate('Home');
     } catch (error) {
       console.log(error);

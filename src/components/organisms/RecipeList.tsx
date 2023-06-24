@@ -13,11 +13,12 @@ interface RecipeListProps {
 }
 
 const RecipeList = ({ dataRecipes, orientation }: RecipeListProps) => {
-  const navigation = useNavigation<NavigationProps['Home']>();
+  const navigation = useNavigation<NavigationProps['HomeTab']>();
   return orientation === 'vertical' ? (
     <FlatList
       data={dataRecipes}
       numColumns={2}
+      showsVerticalScrollIndicator={false}
       contentContainerStyle={dataRecipes.length === 0 && RecipeListStyles.listEmptyData}
       ListEmptyComponent={
         <CallToActionCard
@@ -26,7 +27,7 @@ const RecipeList = ({ dataRecipes, orientation }: RecipeListProps) => {
             <MaterialCommunityIcons name="food-variant" size={54} color={MAIN_COLORS.tertiary} />
           }
           buttonText="Explorar recetas"
-          toAction={() => navigation.navigate('Home')}
+          toAction={() => navigation.navigate('HomeTab')}
         />
       }
       renderItem={({ item: recipe }) => (
@@ -48,7 +49,7 @@ const RecipeList = ({ dataRecipes, orientation }: RecipeListProps) => {
             <MaterialCommunityIcons name="food-variant" size={54} color={MAIN_COLORS.tertiary} />
           }
           buttonText="Explorar recetas"
-          toAction={() => navigation.navigate('Home')}
+          toAction={() => navigation.navigate('HomeTab')}
         />
       }
       renderItem={({ item: recipe }) => (

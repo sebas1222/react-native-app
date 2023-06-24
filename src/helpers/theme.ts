@@ -12,7 +12,10 @@ export const MAIN_COLORS = {
 export const CONTAINER_STYLES: ContainerStylesTypes = {
   mainContainer: {
     flex: 1, // con flex 1 indicar que el mainContainer ocupara todo el ancho y alto posible
-    padding: 15,
+    paddingTop:
+      Platform.OS === 'android' ? StatusBar?.currentHeight && StatusBar.currentHeight + 10 : 10,
+    paddingBottom: 10,
+    paddingHorizontal: 10,
   },
 };
 

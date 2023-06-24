@@ -18,6 +18,7 @@ interface SelectContainerProps {
   title: string;
   onClose: () => void;
   handleChangeData: (value: string) => void;
+  defaultLabel?: string;
   value: string;
 }
 
@@ -27,6 +28,7 @@ const SelectContainer = ({
   title,
   onClose,
   handleChangeData,
+  defaultLabel,
   value,
 }: SelectContainerProps) => {
   const handleChangeOption = (value: string) => {
@@ -47,7 +49,7 @@ const SelectContainer = ({
             <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{title}</Text>
           </View>
           <FlatList
-            data={data}
+            data={defaultLabel ? [{ id: '', value: '', valueLabel: defaultLabel }, ...data] : data}
             renderItem={({ item: dataItem }) => (
               <TouchableNativeFeedback onPress={() => handleChangeOption(dataItem.value)}>
                 <View style={SelectContainerStyles.selectOptionContainer}>

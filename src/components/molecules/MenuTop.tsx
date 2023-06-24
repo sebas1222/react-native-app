@@ -14,7 +14,9 @@ const MenuTop = ({ dataUser }: MenuTopProps) => {
   return (
     <View style={MenuTopStyles.container}>
       <View>
-        <AntDesign name="menu-fold" size={24} color="black" />
+        <TouchableOpacity onPress={() => console.log('open drawer')}>
+          <AntDesign name="menu-fold" size={24} color="black" />
+        </TouchableOpacity>
       </View>
       <View>
         <Text style={[MenuTopStyles.textContainer, TYPOGRAPHY_STYLES.subtitle]}>Inicio</Text>

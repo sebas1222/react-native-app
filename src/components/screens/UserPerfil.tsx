@@ -34,7 +34,7 @@ const UserPerfil = () => {
   if (errorRecipes || errorUserInfo) {
     return (
       <View>
-        <Text>{JSON.stringify({ ...errorRecipes, ...errorUserInfo })}</Text>
+        <Text>{errorUserInfo?.graphQLErrors[0].message}</Text>
       </View>
     );
   }

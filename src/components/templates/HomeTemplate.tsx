@@ -18,7 +18,6 @@ interface HomeTemplateProps {
 const HomeTemplate = ({ allRecipes, allCategories, dataCurrentUser }: HomeTemplateProps) => {
   const [categorySelected, setCategorySelected] = useState<string>('Todos');
   const navigation = useNavigation<NavigationProps['AddRecipe']>();
-
   console.log('datauser', dataCurrentUser);
 
   return (

@@ -5,6 +5,7 @@ import { GET_ONE_RECIPE } from '@api/queries';
 import { NavigationContainer } from '@react-navigation/native';
 import RecipeDetails from '@screens/RecipeDetails';
 import { createStackNavigator } from '@react-navigation/stack';
+import { GraphQLError } from 'graphql';
 
 const mocks = [
   {
@@ -43,6 +44,21 @@ const mocks = [
   },
 ]; //
 
+const mockError = [
+  {
+    request: {
+      query: GET_ONE_RECIPE,
+      variables: {
+        idRecipe: 'RecetaTestID',
+      },
+      //agregar variables si es que se necesitan
+    },
+    result: {
+      errors: [new GraphQLError('Error al obtener la receta!')],
+    },
+  },
+];
+
 const Stack = createStackNavigator();
 
 describe('<RecipeDetails/>', () => {
@@ -64,6 +80,26 @@ describe('<RecipeDetails/>', () => {
       //verificar que se renderiza la receta
       const recipeText = queryByText('Receta Test');
       expect(recipeText).toBeTruthy();
+    });
+  });
+  it('Se muestra el mensaje de error en la pantalla cuando ocurre un error', async () => {
+    const { queryByText } = render(
+      <NavigationContainer>
+        <MockedProvider mocks={mockError}>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="RecipeDetails"
+              component={RecipeDetails}
+              initialParams={{ recipeId: 'RecetaTestID' }} // Proporcionar el recipeId como parámetro inicial
+            />
+          </Stack.Navigator>
+        </MockedProvider>
+      </NavigationContainer>
+    );
+    await waitFor(() => {
+      const errorText = queryByText('Error al obtener la receta!');
+      console.log({ errorText });
+      expect(errorText).toBeTruthy();
     });
   });
 });

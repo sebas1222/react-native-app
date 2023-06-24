@@ -1,4 +1,5 @@
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { StackNavigationProp } from '@react-navigation/stack';
 import * as ImagePicker from 'expo-image-picker';
 import { TextStyle, ViewStyle } from 'react-native';
@@ -118,6 +119,8 @@ export type RootStackParamList = {
   UserPerfil: { userId: string };
   Search: undefined;
   Settings: undefined;
+  Favorites: undefined;
+  Account: undefined;
 };
 
 export type NavigationProps = {
@@ -131,6 +134,8 @@ export type NavigationProps = {
   AddRecipe: BottomTabNavigationProp<RootStackParamList, 'AddRecipe'>;
   Settings: BottomTabNavigationProp<RootStackParamList, 'Settings'>;
   UserPerfil: BottomTabNavigationProp<RootStackParamList, 'UserPerfil'>;
+  Favorites: DrawerNavigationProp<RootStackParamList, 'Favorites'>;
+  Account: DrawerNavigationProp<RootStackParamList, 'Account'>;
 };
 
 // Tipado de estilos globales

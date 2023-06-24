@@ -27,7 +27,7 @@ const Home = () => {
     data: dataUser,
   } = useQuery(GET_ONE_USER, {
     variables: {
-      idUser: currentUser?._id,
+      idUser: currentUser._id,
     },
   });
 
@@ -40,10 +40,11 @@ const Home = () => {
   if (loadingRecipes || loadingCategories || loadingUser) {
     return <RCLoadingIndicator />;
   }
+
   if (errorRecipes || errorCategories || errorUser) {
     return (
       <View>
-        <Text>{JSON.stringify({ ...errorCategories, ...errorRecipes, ...errorUser })}</Text>
+        <Text>{errorRecipes?.graphQLErrors[0].message}</Text>
       </View>
     );
   }

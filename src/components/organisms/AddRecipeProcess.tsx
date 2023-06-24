@@ -13,6 +13,7 @@ import { POST_RECIPE } from '@api/queries';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import { useMutationAction } from '@hooks/useMutationAction';
+import Slider from '@react-native-community/slider';
 
 const initialValuesAddRecipeForm: AddRecipeFormTypes = {
   name: '',
@@ -216,11 +217,16 @@ const AddRecipeProcess = ({ categories }: AddRecipeProcessProps) => {
               )
             }
           />
-          <Text style={{ color: 'grey' }}>Duración (en mins)</Text>
-          <RCTextInput
-            value={String(addRecipeForm.duration)}
-            keyboardType="numeric"
-            onChangeText={(value) => handleChangeForm('duration', Number(value))}
+          <Text style={{ color: 'grey' }}>Duración (en mins) : {addRecipeForm.duration}</Text>
+          <Slider
+            value={addRecipeForm.duration}
+            onValueChange={(value) => handleChangeForm('duration', Math.trunc(value))}
+            style={{ height: 20 }}
+            thumbTintColor={MAIN_COLORS.primary}
+            minimumValue={0}
+            maximumValue={120}
+            minimumTrackTintColor={MAIN_COLORS.primary}
+            maximumTrackTintColor="#000000"
           />
         </ProcessStep>
       )}
