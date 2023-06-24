@@ -32,7 +32,6 @@ const HomeTemplate = ({ allRecipes, allCategories, dataCurrentUser }: HomeTempla
     <SafeAreaView
       style={{
         flex: 1,
-        paddingTop: Platform.OS ? StatusBar.currentHeight : 0,
       }}
     >
       <MenuTop dataUser={dataCurrentUser} />
