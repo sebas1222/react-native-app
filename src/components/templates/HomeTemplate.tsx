@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { SafeAreaView, StyleSheet, ScrollView, Text, View } from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  Text,
+  View,
+  Platform,
+  StatusBar,
+} from 'react-native';
 import CallToActionCard from '@molecules/CallToActionCard';
 import { CategoryTypes, NavigationProps, RecipeTypes, UserTypes } from '@interfaces/index';
 import CategoriesList from '@organisms/CategoriesList';
@@ -21,7 +29,12 @@ const HomeTemplate = ({ allRecipes, allCategories, dataCurrentUser }: HomeTempla
   console.log('datauser', dataCurrentUser);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        paddingTop: Platform.OS ? StatusBar.currentHeight : 0,
+      }}
+    >
       <MenuTop dataUser={dataCurrentUser} />
       <View style={CONTAINER_STYLES.mainContainer}>
         <ScrollView

@@ -13,9 +13,9 @@ export const CONTAINER_STYLES: ContainerStylesTypes = {
   mainContainer: {
     flex: 1, // con flex 1 indicar que el mainContainer ocupara todo el ancho y alto posible
     paddingTop:
-      Platform.OS === 'android' ? StatusBar?.currentHeight && StatusBar.currentHeight + 10 : 10,
-    paddingBottom: 10,
-    paddingHorizontal: 10,
+      Platform.OS === 'android' ? StatusBar?.currentHeight && StatusBar.currentHeight + 15 : 15,
+    paddingBottom: 15,
+    paddingHorizontal: 15,
   },
 };
 

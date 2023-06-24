@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { MAIN_COLORS, TYPOGRAPHY_STYLES } from '@helpers/theme';
 import { NavigationProps, UserTypes } from '@interfaces/index';
@@ -42,10 +42,7 @@ const MenuTopStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop:
-      Platform.OS === 'android' ? StatusBar?.currentHeight && StatusBar.currentHeight + 15 : 15,
-    paddingBottom: 15,
-    paddingHorizontal: 15,
+    padding: 15,
   },
   avatarContainer: {
     width: 40,

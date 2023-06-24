@@ -48,7 +48,7 @@ const TextInputList = ({
   };
 
   return (
-    <View>
+    <View style={{ gap: 15 }}>
       <RCButton
         type="primaryButton"
         text={buttonAddText || ''}
