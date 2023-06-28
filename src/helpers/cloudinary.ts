@@ -9,8 +9,8 @@ import {
 
 export const uploadImagesCloudinary = async (
   assets: Array<ImagePicker.ImagePickerAsset>
-//): Promise<string[]> => {
-//  const promises = assets.map((asset) => {
+): Promise<string[]> => {
+  const promises = assets.map((asset) => {
     return new Promise<string>((resolve, reject) => {
       const formData = new FormData();
       formData.append('file', {
