@@ -8,7 +8,7 @@ import store, { Persistor } from './src/redux/store/index';
 import { PersistGate } from 'redux-persist/integration/react';
 
 const client = new ApolloClient({
-  uri: 'https://graphql-server-icook-production.up.railway.app/',
+  uri: 'https://graphql-server-icook-production-7a31.up.railway.app/',
   cache: new InMemoryCache({
     typePolicies: {
       User: {
