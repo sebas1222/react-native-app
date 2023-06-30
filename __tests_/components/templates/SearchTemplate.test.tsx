@@ -5,18 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import SearchTemplate from '@templates/SearchTemplate';
-import { GET_ALL_CATEGORIES, GET_ALL_RECIPES } from '@api/queries';
-
-// describe('NewMessageForm', () => {
-//   describe('clicking send', () => {
-//     it('clears the message field', () => {
-//       render(<NewMessageForm />);
-
-//       fireEvent.changeText(screen.getByPlaceholderText('Message'), 'Hello world');
-//       fireEvent.press(screen.getByText('Send'));
-//     });
-//   });
-// })
+import { GET_ALL_RECIPES } from '@api/queries';
 
 const mocks = [
     {
@@ -139,6 +128,8 @@ const initialState = {
 const store = mockStore(initialState);
 
 describe('<SearchTemplate/>', () => {
+    // En esta prueba buscamos las recetas con la palabra clave "Hola" y verificamso
+    // que existe una receta con el nombre "Receta Hola 2"
     it('Renderiza el UI esperado cuando la data esta habilitada', async () => {
       const { queryByText } = render(
         <NavigationContainer>
@@ -159,6 +150,9 @@ describe('<SearchTemplate/>', () => {
       });
     });
 
+
+    // En esta prueba, buscamos recetas con la palabra clave "Hola ascefsees", aqui verificamos
+    // nos muestre el mensaje "No hay recetas que mostrar", ya que no existe ninguna receta con la palabra clave
     it('Renderiza el UI esperado cuando la data esta habilitada', async () => {
         const { queryByText } = render(
           <NavigationContainer>
