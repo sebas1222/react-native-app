@@ -58,6 +58,10 @@ const categoriesData = [{
 {
     id: 'id2',
     name: 'vegetariana'
+},
+{
+    id: 'id3',
+    name: 'criolla'
 }];
   
 
@@ -102,7 +106,7 @@ describe('<SearchTemplate/>', () => {
       });
 
     // En esta prueba, buscamos recetas con la categoria "pastas", aqui verificamos
-    // nos muestre el mensaje "No hay recetas que mostrar", ya que no existe ninguna receta con la palabra clave
+    // muestre la receta "Receta Hola 2"
     it('Renderiza el UI esperado cuando la data esta habilitada', async () => {
       const { queryByText } = render(
         <NavigationContainer>
@@ -116,6 +120,26 @@ describe('<SearchTemplate/>', () => {
 
         //verificar que se renderiza una receta
         const recipeText = queryByText('Receta Hola 2');
+        console.log("Mensaje: ", recipeText);
+        expect(recipeText).toBeTruthy();
+      });
+    });
+
+    // En esta prueba, buscamos recetas con la categoria "criolla", aqui verificamos
+    // nos muestre el mensaje "No hay recetas que mostrar", ya que no existe ninguna receta con la palabra clave
+    it('Renderiza el UI esperado cuando la data esta habilitada', async () => {
+      const { queryByText } = render(
+        <NavigationContainer>
+              <SearchTemplate recipesData={recipesData} categoriesData={categoriesData} />
+        </NavigationContainer>
+      );
+      await waitFor(() => {
+        fireEvent.press(screen.getByText('Filtrar por categoría'));
+        fireEvent.press(screen.getByText('criolla'));
+        console.log("Buscando la receta");
+
+        //verificar que se renderiza una receta
+        const recipeText = queryByText('No hay recetas que mostrar');
         console.log("Mensaje: ", recipeText);
         expect(recipeText).toBeTruthy();
       });
