@@ -76,8 +76,8 @@ const recipesData = [
         name: 'Autor test',
       },
       category: {
-        id: 'test1',
-        name: 'Category test',
+        id: 'id2',
+        name: 'vegetariana'
       },
       ingredients: ['potato', 'onion'],
       steps: [
@@ -90,15 +90,15 @@ const recipesData = [
         id: 'RecetaTestID2',
         name: 'Receta Hola 2',
         description: 'Una receta que es test',
-        duration: 10,
+        duration: 100,
         images: [],
         author: {
           id: 'test2',
           name: 'Autor test',
         },
         category: {
-          id: 'test2',
-          name: 'Category test',
+          id: 'id1',
+          name: 'pastas'
         },
         ingredients: ['potato', 'onion'],
         steps: [
@@ -172,5 +172,29 @@ describe('<SearchTemplate/>', () => {
           expect(recipeText).toBeTruthy();
         });
       });
+
+    // En esta prueba, buscamos recetas con la categoria "pastas", aqui verificamos
+    // nos muestre el mensaje "No hay recetas que mostrar", ya que no existe ninguna receta con la palabra clave
+    it('Renderiza el UI esperado cuando la data esta habilitada', async () => {
+      const { queryByText } = render(
+        <NavigationContainer>
+          <Provider store={store}>
+            <MockedProvider mocks={mocks}>
+              <SearchTemplate recipesData={recipesData} categoriesData={categoriesData} />
+            </MockedProvider>
+          </Provider>
+        </NavigationContainer>
+      );
+      await waitFor(() => {
+        //fireEvent.changeText(screen.getByText('Duración en (mins) : 120'), `Duración en (mins) : ${15}`);
+        fireEvent.press(screen.getByText('Filtrar por categoría'));
+        fireEvent.press(screen.getByText('pastas'));
+        console.log("Buscando la receta");
+        //verificar que se renderiza una receta
+        const recipeText = queryByText('Receta Hola 2');
+        console.log("Mensaje: ", recipeText);
+        expect(recipeText).toBeTruthy();
+      });
+    });
   });
 
