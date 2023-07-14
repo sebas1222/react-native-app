@@ -138,7 +138,6 @@ describe('<SearchTemplate/>', () => {
     await waitFor(() => {
       const slider = getByTestId('input_duration');
       fireEvent(slider, 'valueChange', 20);
-      console.log('RAAA', slider);
       const recipeText = queryByText('No hay recetas que mostrar');
       expect(recipeText).toBeTruthy();
     });
