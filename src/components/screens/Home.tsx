@@ -50,7 +50,7 @@ const Home = () => {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View testID="home-screen" style={{ flex: 1 }}>
       <HomeTemplate
         allRecipes={dataRecipes.allRecipes}
         allCategories={dataCategories.allCategories}

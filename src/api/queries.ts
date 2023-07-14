@@ -93,6 +93,17 @@ export const REGISTER_USER = gql`
   mutation RegisterUser($credentials: CreateUserInput) {
     createUser(credentials: $credentials) {
       id
+      name
+      email
+      avatar
+      following {
+        id
+        name
+      }
+      followers {
+        id
+        name
+      }
     }
   }
 `;

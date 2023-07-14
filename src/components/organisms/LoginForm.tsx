@@ -25,7 +25,7 @@ const LoginForm = () => {
   const { mutationFn: loginUser, error, loading } = useMutationAction(LOGIN_USER);
 
   const dispatch = useDispatch();
-
+  console.log('ACA VA EL ERROR', error);
   const handleSubmitLogin = async (values: LoginFormTypes) => {
     try {
       const result = await loginUser({ variables: { credentials: values } });
