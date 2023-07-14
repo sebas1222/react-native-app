@@ -85,6 +85,7 @@ const SearchTemplate = ({ recipesData, categoriesData }: SearchTemplateProps) =>
           value={currentDuration}
           onValueChange={(value) => setCurrentDuration(Math.trunc(value))}
           style={{ height: 50 }}
+          testID="input_duration"
           thumbTintColor={MAIN_COLORS.primary}
           minimumValue={15}
           maximumValue={120}
