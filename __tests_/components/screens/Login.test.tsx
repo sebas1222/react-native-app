@@ -17,6 +17,9 @@ const user = {
   following: [],
 };
 
+//mock no servira para definir los datos enviados (request)
+//y aquellos datos que tenemos esperado como respuesta (result)
+
 const mock = [
   {
     request: {
@@ -45,6 +48,9 @@ const initialState = {
 };
 const store = mockStore(initialState);
 
+  //En este apartado se realizaran las validaciones
+  //si el expect(missingName) se cumple, entonces no es valido
+  
 describe('<Login/>', () => {
   it('No permitir el inicio de sesión si el campo email esta vacío', async () => {
     const { queryByText } = render(
