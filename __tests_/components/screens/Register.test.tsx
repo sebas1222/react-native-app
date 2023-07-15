@@ -16,6 +16,9 @@ const user = {
   following: [],
 };
 
+
+//mock no servira para definir los datos enviados (request)
+//y aquellos datos que tenemos esperado como respuesta (result)
 const mock = [
   {
     request: {
@@ -58,6 +61,8 @@ describe('<Register/>', () => {
     );
   });
 
+  //En este apartado se realizaran las validaciones
+  //si el expect(missingName) se cumple, entonces no es valido
   it('No permitir el registro si el campo "Nombre" esta vacío', async () => {
     const { queryByText } = component;
     await waitFor(() => {
