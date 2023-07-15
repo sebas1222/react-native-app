@@ -25,7 +25,7 @@ const MenuButtons = ({ options, value, onChangeOption, numSection }: MenuButtons
         contentContainerStyle={{ backgroundColor: MAIN_COLORS.quartery }}
         data={options}
         renderItem={({ item: option }) => (
-          <View style={{ width: screenWidth / numSection }}>
+          <View testID={`view-${option.testID}`} style={{ width: screenWidth / numSection }}>
             <RCButton
               text={option.valueLabel}
               onPress={() => handleChangeOption(option.value)}

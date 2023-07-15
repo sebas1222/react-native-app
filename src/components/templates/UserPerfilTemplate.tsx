@@ -43,14 +43,16 @@ const UserPerfilTemplate = ({ dataUser, dataRecipes }: UserPerfilTemplateProps) 
           numSection={3}
           onChangeOption={(value) => setCurrentSection(value)}
           options={[
-            { id: '1', value: 'Recipes', valueLabel: `Recetas (${dataRecipes.length})` },
+            { id: '1', testID: '1', value: 'Recipes', valueLabel: `Recetas (${dataRecipes.length})` },
             {
               id: '2',
+              testID: '2',
               value: 'Following',
               valueLabel: `Siguiendo (${dataUser.following.length})`,
             },
             {
               id: '3',
+              testID: '3',
               value: 'Followers',
               valueLabel: `Seguidores (${dataUser.followers.length})`,
             },

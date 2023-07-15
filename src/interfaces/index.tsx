@@ -90,6 +90,7 @@ export interface SelectDataTypes {
   id: string;
   value: string;
   valueLabel: string;
+  testID?: string;
 }
 
 export interface TextInputListItemTypes {
